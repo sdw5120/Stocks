@@ -38,7 +38,7 @@ st.caption("Research and alerts only. This app does not connect to a brokerage o
 
 
 @st.cache_data(show_spinner=False)
-def cached_watchlist() -> pd.DataFrame:
+def cached_watchlist(watchlist_mtime: float) -> pd.DataFrame:
     return load_watchlist(WATCHLIST_PATH)
 
 
@@ -114,7 +114,7 @@ with st.sidebar:
     max_risk_percent = st.number_input("Max risk per trade %", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
 
     st.divider()
-    watchlist = cached_watchlist()
+    watchlist = cached_watchlist(file_mtime(WATCHLIST_PATH))
     st.metric("Watchlist tickers", len(watchlist))
     st.caption(f"Database: {DATABASE_PATH}")
 
