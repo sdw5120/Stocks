@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from datetime import date, datetime, timezone
 from email.message import EmailMessage
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable
 
 import numpy as np
 import pandas as pd
@@ -31,6 +31,7 @@ OUTPUT_PATH = Path("daily_candidates.csv")
 CONFIG_PATH = Path("config.toml")
 DATABASE_PATH = Path("research.db")
 TRADING_DAYS_3M = 63
+ProgressCallback = Callable[[str, int, int, str], None]
 
 CATALYST_KEYWORDS: dict[str, tuple[str, ...]] = {
     "Earnings Beat": ("beats estimates", "beat estimates", "beats expectations", "earnings beat", "raises guidance"),
@@ -689,19 +690,29 @@ def classify(final_score: float) -> str:
     return "Pass"
 
 
-def build_candidates(config: ResearchConfig | None = None) -> pd.DataFrame:
+def build_candidates(config: ResearchConfig | None = None, progress_callback: ProgressCallback | None = None) -> pd.DataFrame:
     config = config or load_config()
     setup_logging()
+    if progress_callback:
+        progress_callback("Starting", 0, 100, "Loading watchlist")
     watchlist = load_watchlist(config.watchlist_path)
+    total_tickers = len(watchlist)
+    if progress_callback:
+        progress_callback("Database", 5, 100, "Opening research database")
     conn = init_db(config.database_path)
 
+    if progress_callback:
+        progress_callback("Market Data", 10, 100, f"Downloading OHLCV for {total_tickers} tickers")
     raw = _download_ohlcv(watchlist["Symbol"], config.period)
     spy = _frame_for_symbol(raw, "SPY")
     spy_return_3m = _pct_return(spy["Close"], TRADING_DAYS_3M) if not spy.empty else np.nan
 
     rows: list[dict[str, object]] = []
-    for item in watchlist.itertuples(index=False):
+    for index, item in enumerate(watchlist.itertuples(index=False), start=1):
         symbol = item.Symbol
+        if progress_callback:
+            progress_value = 15 + int((index - 1) / max(total_tickers, 1) * 70)
+            progress_callback("Ticker Research", progress_value, 100, f"Analyzing {symbol} ({index}/{total_tickers})")
         frame = _frame_for_symbol(raw, symbol)
         base = {"Symbol": symbol, "Tier": item.Tier, "Category": item.Category}
 
@@ -730,6 +741,8 @@ def build_candidates(config: ResearchConfig | None = None) -> pd.DataFrame:
         )
 
     conn.commit()
+    if progress_callback:
+        progress_callback("Scoring", 88, 100, "Calculating final scores and ranks")
     candidates = pd.DataFrame(rows)
     candidates["RelativeStrengthScore"] = percentile_score(candidates["RelativeStrength3M"]).fillna(0)
     candidates["TechnicalScore"] = candidates["TechnicalScore"].fillna(0).astype(float)
@@ -772,11 +785,15 @@ def build_candidates(config: ResearchConfig | None = None) -> pd.DataFrame:
         "Made52WeekHigh",
     ]
     candidates = candidates[[column for column in preferred_columns if column in candidates.columns]]
+    if progress_callback:
+        progress_callback("Saving", 94, 100, "Writing CSV, ranking history, and alerts")
     candidates.to_csv(config.output_path, index=False)
     store_rankings(conn, candidates)
     store_alerts(conn, candidates, config)
     conn.commit()
     conn.close()
+    if progress_callback:
+        progress_callback("Complete", 100, 100, f"Refresh complete: {len(candidates)} tickers ranked")
     return candidates
 
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import time
 from pathlib import Path
 
 import pandas as pd
@@ -55,6 +56,31 @@ def cached_candidates(refresh_key: int, output_mtime: float) -> pd.DataFrame:
     return build_candidates(CONFIG)
 
 
+def refresh_candidates_with_progress() -> pd.DataFrame:
+    progress_bar = st.progress(0, text="Starting refresh")
+    status_text = st.empty()
+    started_at = time.monotonic()
+
+    def update_progress(stage: str, current: int, total: int, message: str) -> None:
+        total = max(total, 1)
+        current = min(max(current, 0), total)
+        percent = int(current / total * 100)
+        elapsed = time.monotonic() - started_at
+        eta = ""
+        if percent > 3:
+            remaining = max((elapsed / percent) * (100 - percent), 0)
+            eta = f" | about {remaining / 60:.1f} min left" if remaining >= 60 else f" | about {remaining:.0f} sec left"
+        progress_bar.progress(percent, text=f"{stage}: {message}")
+        status_text.caption(f"{percent}% complete | elapsed {elapsed / 60:.1f} min{eta}")
+
+    with st.status("Refreshing research data", expanded=True) as status:
+        status.write("Pulling market data, earnings, news, catalysts, rankings, and alerts.")
+        candidates_frame = build_candidates(CONFIG, progress_callback=update_progress)
+        status.update(label="Research data refreshed", state="complete", expanded=False)
+    progress_bar.progress(100, text="Refresh complete")
+    return candidates_frame
+
+
 @st.cache_data(show_spinner=False)
 def cached_db_tables(refresh_key: int, database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     if not DATABASE_PATH.exists():
@@ -95,7 +121,7 @@ def cached_trade_setups(
     portfolio_size: float,
     max_risk_percent: float,
 ) -> pd.DataFrame:
-    if SETUPS_CSV.exists() and refresh_key == 0:
+    if SETUPS_CSV.exists():
         return pd.read_csv(SETUPS_CSV)
     candidates = cached_candidates(refresh_key, output_mtime)
     setup_config = SetupConfig(portfolio_size=portfolio_size, max_risk_percent=max_risk_percent)
@@ -129,7 +155,10 @@ if refresh:
     cached_trade_setups.clear()
 
 try:
-    candidates = cached_candidates(refresh_key, file_mtime(OUTPUT_PATH))
+    if refresh:
+        candidates = refresh_candidates_with_progress()
+    else:
+        candidates = cached_candidates(refresh_key, file_mtime(OUTPUT_PATH))
 except Exception as exc:
     st.error(str(exc))
     st.info("Install dependencies with: py -3 -m pip install -r requirements.txt")
