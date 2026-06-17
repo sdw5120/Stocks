@@ -49,6 +49,11 @@ SETUP_COLUMNS = [
     "Risk/Reward T3",
     "Trade Quality Score",
     "Timeframe",
+    "Estimated Holding Period",
+    "Expected Time to Target 1",
+    "Expected Time to Target 2",
+    "Expected Time to Target 3",
+    "Holding Period Confidence",
     "Bull Thesis",
     "Bear Thesis",
     "Catalysts",
@@ -139,6 +144,140 @@ def calculate_atr(frame: pd.DataFrame, period: int = 14) -> pd.Series:
     low_prev_close = (frame["Low"] - frame["Close"].shift()).abs()
     true_range = pd.concat([high_low, high_prev_close, low_prev_close], axis=1).max(axis=1)
     return true_range.rolling(period).mean()
+
+
+def historical_daily_volatility(frame: pd.DataFrame, lookback: int = 60) -> float:
+    recent = frame.tail(lookback + 1).dropna(subset=["Close"])
+    if len(recent) < 15:
+        return np.nan
+    returns = recent["Close"].pct_change().dropna()
+    if returns.empty:
+        return np.nan
+    return float(returns.std())
+
+
+def average_trend_duration(frame: pd.DataFrame, lookback: int = 120) -> float:
+    recent = frame.tail(lookback + 1).dropna(subset=["Close"])
+    if len(recent) < 20:
+        return np.nan
+    direction = np.sign(recent["Close"].diff().dropna())
+    direction = direction[direction != 0]
+    if direction.empty:
+        return np.nan
+
+    runs: list[int] = []
+    current_run = 1
+    previous = direction.iloc[0]
+    for value in direction.iloc[1:]:
+        if value == previous:
+            current_run += 1
+        else:
+            runs.append(current_run)
+            current_run = 1
+            previous = value
+    runs.append(current_run)
+    return float(np.mean(runs)) if runs else np.nan
+
+
+def format_holding_range(estimated_days: float) -> str:
+    if pd.isna(estimated_days) or estimated_days <= 0:
+        return "Insufficient history"
+    days = int(math.ceil(estimated_days))
+    if days <= 5:
+        lower = max(1, days - 1)
+        upper = max(days + 2, lower + 1)
+        return f"{lower}-{upper} trading days"
+    if days <= 15:
+        lower = max(1, math.floor(days / 5))
+        upper = max(lower + 1, math.ceil((days + 5) / 5))
+        return f"{lower}-{upper} weeks"
+    if days <= 40:
+        lower = max(3, math.floor(days / 5))
+        upper = max(lower + 2, math.ceil((days + 10) / 5))
+        return f"{lower}-{upper} weeks"
+    return "8+ weeks"
+
+
+def holding_period_confidence(
+    *,
+    frame_length: int,
+    atr: float,
+    daily_volatility: float,
+    average_volume: float,
+    relative_volume: float,
+    trend_duration: float,
+) -> str:
+    if frame_length < 120 or pd.isna(atr) or atr <= 0 or pd.isna(daily_volatility) or daily_volatility <= 0:
+        return "Low Confidence"
+
+    score = 0
+    if frame_length >= 250:
+        score += 1
+    if pd.notna(average_volume) and average_volume >= 1_000_000:
+        score += 1
+    if pd.notna(relative_volume) and relative_volume >= 1.2:
+        score += 1
+    if pd.notna(trend_duration) and 2 <= trend_duration <= 8:
+        score += 1
+    if daily_volatility <= 0.05:
+        score += 1
+
+    if score >= 4:
+        return "High Confidence"
+    if score >= 2:
+        return "Medium Confidence"
+    return "Low Confidence"
+
+
+def estimate_holding_periods(
+    frame: pd.DataFrame,
+    entry_price: float,
+    target_1: float,
+    target_2: float,
+    target_3: float,
+    atr: float,
+    average_volume: float,
+    relative_volume: float,
+) -> dict[str, str]:
+    daily_volatility = historical_daily_volatility(frame)
+    trend_duration = average_trend_duration(frame)
+    volatility_move = entry_price * daily_volatility if pd.notna(daily_volatility) else np.nan
+    atr_move = atr * 0.65 if pd.notna(atr) and atr > 0 else np.nan
+    fallback_move = entry_price * 0.005
+    expected_daily_move = float(np.nanmax([volatility_move, atr_move, fallback_move]))
+
+    if not np.isfinite(expected_daily_move) or expected_daily_move <= 0:
+        expected_daily_move = max(entry_price * 0.005, 0.01)
+
+    trend_factor = 1.0
+    if pd.notna(trend_duration):
+        if trend_duration >= 6:
+            trend_factor = 0.85
+        elif trend_duration < 2:
+            trend_factor = 1.2
+
+    def days_to(target: float) -> float:
+        return max(1.0, (abs(float(target) - entry_price) / expected_daily_move) * trend_factor)
+
+    target_1_days = days_to(target_1)
+    target_2_days = days_to(target_2)
+    target_3_days = days_to(target_3)
+    confidence = holding_period_confidence(
+        frame_length=len(frame),
+        atr=atr,
+        daily_volatility=daily_volatility,
+        average_volume=average_volume,
+        relative_volume=relative_volume,
+        trend_duration=trend_duration,
+    )
+
+    return {
+        "Estimated Holding Period": format_holding_range(target_3_days),
+        "Expected Time to Target 1": format_holding_range(target_1_days),
+        "Expected Time to Target 2": format_holding_range(target_2_days),
+        "Expected Time to Target 3": format_holding_range(target_3_days),
+        "Holding Period Confidence": confidence,
+    }
 
 
 def recent_support_resistance(frame: pd.DataFrame, lookback: int = 60) -> tuple[float, float]:
@@ -464,6 +603,16 @@ def build_trade_setup(
     setup_type, entry_price = classify_entry_type(current_price, ma20, ma50, ma200, support, resistance, atr)
     stop_loss = calculate_stop_loss(entry_price, support, ma20, ma50, atr)
     target_1, target_2, target_3 = calculate_targets(entry_price, stop_loss, resistance)
+    holding_periods = estimate_holding_periods(
+        frame,
+        entry_price,
+        target_1,
+        target_2,
+        target_3,
+        atr,
+        avg_volume,
+        relative_volume,
+    )
     risk_per_share = round(entry_price - stop_loss, 2)
     shares, max_dollar_risk = position_size(config.portfolio_size, config.max_risk_percent, entry_price, stop_loss)
     rr_1 = risk_reward(entry_price, stop_loss, target_1)
@@ -513,6 +662,7 @@ def build_trade_setup(
         "Risk/Reward T3": rr_3,
         "Trade Quality Score": quality,
         "Timeframe": "Swing trade: 2-8 weeks",
+        **holding_periods,
         "Bull Thesis": bull_thesis(row, setup_type),
         "Bear Thesis": bear_thesis(row),
         "Catalysts": catalyst_text(row),
@@ -564,6 +714,16 @@ def evaluate_trade_setup(
     setup_type, entry_price = classify_entry_type(current_price, ma20, ma50, ma200, support, resistance, atr)
     stop_loss = calculate_stop_loss(entry_price, support, ma20, ma50, atr)
     target_1, target_2, target_3 = calculate_targets(entry_price, stop_loss, resistance)
+    long_holding_periods = estimate_holding_periods(
+        frame,
+        entry_price,
+        target_1,
+        target_2,
+        target_3,
+        atr,
+        avg_volume,
+        relative_volume,
+    )
     risk_per_share = round(entry_price - stop_loss, 2)
     shares, max_dollar_risk = position_size(config.portfolio_size, config.max_risk_percent, entry_price, stop_loss)
     rr_1 = risk_reward(entry_price, stop_loss, target_1)
@@ -625,6 +785,7 @@ def evaluate_trade_setup(
         "Risk/Reward T3": rr_3,
         "Trade Quality Score": long_quality,
         "Timeframe": "Swing trade: 2-8 weeks",
+        **long_holding_periods,
         "Bull Thesis": bull_thesis(row, setup_type),
         "Bear Thesis": bear_thesis(row),
         "Catalysts": catalyst_text(row),
@@ -646,6 +807,16 @@ def evaluate_trade_setup(
     short_setup_type, short_entry = classify_short_entry_type(frame, current_price, ma20, ma50, ma200, support, resistance, atr)
     short_stop = calculate_short_stop_loss(short_entry, resistance, ma20, ma50, atr)
     short_target_1, short_target_2, short_target_3 = calculate_short_targets(short_entry, short_stop)
+    short_holding_periods = estimate_holding_periods(
+        frame,
+        short_entry,
+        short_target_1,
+        short_target_2,
+        short_target_3,
+        atr,
+        avg_volume,
+        relative_volume,
+    )
     short_shares, short_max_risk = short_position_size(config.portfolio_size, config.max_risk_percent, short_entry, short_stop)
     cover_1, cover_2, cover_3 = take_profit_plan(short_shares)
     short_rr_1 = short_risk_reward(short_entry, short_stop, short_target_1)
@@ -696,6 +867,7 @@ def evaluate_trade_setup(
         "Risk/Reward T3": short_rr_3,
         "Trade Quality Score": short_quality,
         "Timeframe": "Swing trade: 2-8 weeks",
+        **short_holding_periods,
         "Bull Thesis": short_bull_case(row),
         "Bear Thesis": short_bear_case(row, short_setup_type),
         "Catalysts": short_catalyst_text(row),

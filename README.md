@@ -127,6 +127,8 @@ Each ticker is evaluated for both long and short setup potential. The engine kee
 
 Short setup types include breakdown, failed breakout, bear flag, and moving-average rejection. Short outputs include short entry, stop, 1R/2R/3R targets, shares to short, cover plan, and borrow/squeeze warnings. Borrow availability, short interest, and float must still be checked manually before acting.
 
+Generated setups include estimated holding periods for Target 1, Target 2, and Target 3. The estimate blends ATR, historical daily volatility, target distance, average trend duration, and liquidity context, then labels the estimate as High, Medium, or Low Confidence.
+
 Exports:
 
 - `trade_setups.csv`

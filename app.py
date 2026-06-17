@@ -95,6 +95,8 @@ def cached_trade_setups(
     portfolio_size: float,
     max_risk_percent: float,
 ) -> pd.DataFrame:
+    if SETUPS_CSV.exists() and refresh_key == 0:
+        return pd.read_csv(SETUPS_CSV)
     candidates = cached_candidates(refresh_key, output_mtime)
     setup_config = SetupConfig(portfolio_size=portfolio_size, max_risk_percent=max_risk_percent)
     setups = generate_trade_setups(candidates, setup_config)
@@ -330,6 +332,11 @@ with tabs[9]:
                         "Trade Quality Score",
                         "Long Trade Quality Score",
                         "Short Trade Quality Score",
+                        "Estimated Holding Period",
+                        "Expected Time to Target 1",
+                        "Expected Time to Target 2",
+                        "Expected Time to Target 3",
+                        "Holding Period Confidence",
                         "Rejected Reasons",
                     ]
                     if column in rejected_setups.columns
@@ -359,6 +366,11 @@ with tabs[9]:
             "Max Dollar Risk",
             "Trade Quality Score",
             "Timeframe",
+            "Estimated Holding Period",
+            "Expected Time to Target 1",
+            "Expected Time to Target 2",
+            "Expected Time to Target 3",
+            "Holding Period Confidence",
         ]
         st.dataframe(
             trade_setups[visible_columns].head(10),
@@ -376,6 +388,11 @@ with tabs[9]:
         detail_cols[0].metric("Entry", f"{selected_setup['Entry Price']:.2f}")
         detail_cols[1].metric("Stop", f"{selected_setup['Stop Loss']:.2f}")
         detail_cols[2].metric("Quality", f"{selected_setup['Trade Quality Score']:.1f}")
+        st.write(f"**Estimated Holding Period:** {selected_setup['Estimated Holding Period']}")
+        st.write(f"**Expected Time to Target 1:** {selected_setup['Expected Time to Target 1']}")
+        st.write(f"**Expected Time to Target 2:** {selected_setup['Expected Time to Target 2']}")
+        st.write(f"**Expected Time to Target 3:** {selected_setup['Expected Time to Target 3']}")
+        st.write(f"**Confidence:** {selected_setup['Holding Period Confidence']}")
         st.write(f"**Bull Thesis:** {selected_setup['Bull Thesis']}")
         st.write(f"**Bear Thesis:** {selected_setup['Bear Thesis']}")
         st.write(f"**Catalysts:** {selected_setup['Catalysts']}")

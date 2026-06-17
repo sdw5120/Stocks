@@ -31,6 +31,9 @@ from trade_setups import (
     calculate_short_targets,
     classify_entry_type,
     classify_short_entry_type,
+    estimate_holding_periods,
+    format_holding_range,
+    holding_period_confidence,
     market_regime_from_spy,
     position_size,
     risk_reward,
@@ -278,6 +281,54 @@ class TradingResearchTests(unittest.TestCase):
         frame = pd.DataFrame({"Close": close}, index=index)
 
         self.assertEqual(market_regime_from_spy(frame), "Bullish")
+
+    def test_holding_period_range_formatting(self) -> None:
+        self.assertEqual(format_holding_range(3), "2-5 trading days")
+        self.assertEqual(format_holding_range(10), "2-3 weeks")
+        self.assertEqual(format_holding_range(30), "6-8 weeks")
+
+    def test_holding_period_confidence(self) -> None:
+        confidence = holding_period_confidence(
+            frame_length=260,
+            atr=2.0,
+            daily_volatility=0.02,
+            average_volume=2_000_000,
+            relative_volume=1.5,
+            trend_duration=4,
+        )
+
+        self.assertEqual(confidence, "High Confidence")
+
+    def test_estimate_holding_periods_outputs_required_fields(self) -> None:
+        index = pd.date_range(end=datetime(2026, 6, 17), periods=260, freq="B")
+        close = np.linspace(80, 100, len(index))
+        frame = pd.DataFrame(
+            {
+                "Open": close - 0.5,
+                "High": close + 1,
+                "Low": close - 1,
+                "Close": close,
+                "Volume": [1_500_000] * len(index),
+            },
+            index=index,
+        )
+
+        periods = estimate_holding_periods(
+            frame,
+            entry_price=100,
+            target_1=105,
+            target_2=110,
+            target_3=115,
+            atr=2,
+            average_volume=1_500_000,
+            relative_volume=1.3,
+        )
+
+        self.assertIn("Estimated Holding Period", periods)
+        self.assertIn("Expected Time to Target 1", periods)
+        self.assertIn("Expected Time to Target 2", periods)
+        self.assertIn("Expected Time to Target 3", periods)
+        self.assertIn(periods["Holding Period Confidence"], {"High Confidence", "Medium Confidence", "Low Confidence"})
 
 
 if __name__ == "__main__":
