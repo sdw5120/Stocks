@@ -130,6 +130,13 @@ def cached_trade_setups(
     return setups
 
 
+@st.cache_data(show_spinner=False)
+def cached_rejected_trade_setups(rejected_mtime: float) -> pd.DataFrame:
+    if not REJECTED_SETUPS_CSV.exists():
+        return pd.DataFrame()
+    return pd.read_csv(REJECTED_SETUPS_CSV)
+
+
 with st.sidebar:
     st.header("Controls")
     refresh = st.button("Refresh research data", type="primary")
@@ -170,6 +177,7 @@ setup_perf_trades, setup_perf_summary, setup_factor_value, setup_perf_recommenda
     refresh_key, file_mtime(DATABASE_PATH)
 )
 trade_setups = cached_trade_setups(refresh_key, file_mtime(OUTPUT_PATH), portfolio_size, max_risk_percent)
+rejected_trade_setups = cached_rejected_trade_setups(file_mtime(REJECTED_SETUPS_CSV))
 filtered = candidates[candidates["FinalScore"] >= min_score].head(int(top_n))
 earnings_flag = (
     candidates["EarningsWithin14Days"].fillna(False).astype(bool)
@@ -343,38 +351,6 @@ with tabs[9]:
 
     if trade_setups.empty:
         st.info("No setups passed the safety filters. Try refreshing market data or lowering risk only after reviewing the filters.")
-        if REJECTED_SETUPS_CSV.exists():
-            rejected_setups = pd.read_csv(REJECTED_SETUPS_CSV)
-            if not rejected_setups.empty:
-                st.subheader("Rejected Setup Candidates")
-                rejected_columns = [
-                    column
-                    for column in [
-                        "Ticker",
-                        "Direction",
-                        "Setup Type",
-                        "Market Regime",
-                        "Current Price",
-                        "Entry Price",
-                        "Stop Loss",
-                        "Risk/Reward T2",
-                        "Trade Quality Score",
-                        "Long Trade Quality Score",
-                        "Short Trade Quality Score",
-                        "Estimated Holding Period",
-                        "Expected Time to Target 1",
-                        "Expected Time to Target 2",
-                        "Expected Time to Target 3",
-                        "Holding Period Confidence",
-                        "Rejected Reasons",
-                    ]
-                    if column in rejected_setups.columns
-                ]
-                st.dataframe(
-                    rejected_setups[rejected_columns].head(20),
-                    use_container_width=True,
-                    hide_index=True,
-                )
     else:
         visible_columns = [
             "Ticker",
@@ -430,6 +406,39 @@ with tabs[9]:
         if selected_setup.get("Direction") == "SHORT":
             st.write(f"**Short Sale Warnings:** {selected_setup.get('Short Sale Warnings', '')}")
         st.write(f"**Notes:** {selected_setup['Notes']}")
+
+    st.subheader("Rejected Setup Candidates")
+    if rejected_trade_setups.empty:
+        st.info("No rejected setup candidates are available yet. Refresh research data after market data loads.")
+    else:
+        rejected_columns = [
+            column
+            for column in [
+                "Ticker",
+                "Direction",
+                "Setup Type",
+                "Market Regime",
+                "Current Price",
+                "Entry Price",
+                "Stop Loss",
+                "Risk/Reward T2",
+                "Trade Quality Score",
+                "Long Trade Quality Score",
+                "Short Trade Quality Score",
+                "Estimated Holding Period",
+                "Expected Time to Target 1",
+                "Expected Time to Target 2",
+                "Expected Time to Target 3",
+                "Holding Period Confidence",
+                "Rejected Reasons",
+            ]
+            if column in rejected_trade_setups.columns
+        ]
+        st.dataframe(
+            rejected_trade_setups[rejected_columns].head(50),
+            use_container_width=True,
+            hide_index=True,
+        )
 
     export_cols = st.columns(2)
     if SETUPS_CSV.exists():
