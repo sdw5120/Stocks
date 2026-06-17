@@ -117,7 +117,15 @@ The analysis only includes horizons that have matured. For example, a ranking fr
 
 ## Trade Setup Generator
 
-The dashboard includes a `Trade Setups` tab. It generates research-only swing trade setups for high-ranking tickers using OHLCV, moving averages, ATR, recent support/resistance, relative volume, relative strength, catalysts, portfolio size, and max risk per trade.
+The dashboard includes a `Trade Setups` tab. It generates research-only swing trade setups using OHLCV, moving averages, ATR, recent support/resistance, relative volume, relative strength, catalysts, portfolio size, and max risk per trade.
+
+Each ticker is evaluated for both long and short setup potential. The engine keeps the higher-scoring direction after applying the market-regime filter:
+
+- Bullish regime: lower threshold for long setups, higher threshold for shorts.
+- Bearish regime: lower threshold for short setups, higher threshold for longs.
+- Neutral regime: both directions use the base threshold.
+
+Short setup types include breakdown, failed breakout, bear flag, and moving-average rejection. Short outputs include short entry, stop, 1R/2R/3R targets, shares to short, cover plan, and borrow/squeeze warnings. Borrow availability, short interest, and float must still be checked manually before acting.
 
 Exports:
 
@@ -125,7 +133,7 @@ Exports:
 - `trade_setups.json`
 - `trade_setups_rejected.csv`
 
-Safety filters block setups when average volume is too low, price is below $3, relative volume is below 1.2, earnings are within 2 trading days, Target 2 risk/reward is below 2:1, or trade quality is below 75. The system does not connect to a brokerage and does not place trades.
+Safety filters block setups when average volume is too low, price is below $3, relative volume is below 1.2, earnings are within 2 trading days, Target 2 risk/reward is below 2:1, or trade quality is below the regime-adjusted threshold. The system does not connect to a brokerage and does not place trades.
 
 Generated setups are stored in the `trade_setups` SQLite table for later 1/5/10/20/60-day performance analysis. The `Performance` dashboard tab includes both ranking-signal performance and generated-setup performance once enough time has passed.
 

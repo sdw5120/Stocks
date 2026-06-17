@@ -27,11 +27,17 @@ from performance_analysis import (
 from trade_setups import (
     SetupConfig,
     calculate_stop_loss,
+    calculate_short_stop_loss,
+    calculate_short_targets,
     classify_entry_type,
+    classify_short_entry_type,
+    market_regime_from_spy,
     position_size,
     risk_reward,
     setup_filter_reasons,
     setup_class,
+    short_position_size,
+    short_risk_reward,
     take_profit_plan,
 )
 
@@ -233,6 +239,45 @@ class TradingResearchTests(unittest.TestCase):
 
         self.assertEqual((t1, t2, t3), (33, 33, 35))
         self.assertEqual(t1 + t2 + t3, 101)
+
+    def test_short_position_sizing(self) -> None:
+        shares, max_risk = short_position_size(100_000, 1.0, 45.0, 50.0)
+
+        self.assertEqual(shares, 200)
+        self.assertEqual(max_risk, 1000.0)
+
+    def test_short_risk_reward_calculation(self) -> None:
+        self.assertEqual(short_risk_reward(45, 50, 35), 2.0)
+        self.assertTrue(np.isnan(short_risk_reward(45, 45, 35)))
+
+    def test_short_stop_and_targets(self) -> None:
+        stop = calculate_short_stop_loss(entry_price=45, resistance=48, ma20=47, ma50=46, atr=2)
+        targets = calculate_short_targets(entry_price=45, stop_loss=stop)
+
+        self.assertGreater(stop, 45)
+        self.assertLess(targets[0], 45)
+        self.assertLess(targets[1], targets[0])
+
+    def test_short_entry_classification(self) -> None:
+        frame = pd.DataFrame(
+            {
+                "High": [105, 104, 103, 102, 101, 100],
+                "Low": [95, 94, 93, 92, 91, 90],
+                "Close": [100, 99, 98, 97, 96, 95],
+                "Volume": [1_000_000] * 6,
+            }
+        )
+        setup_type, entry = classify_short_entry_type(frame, 95, 98, 100, 105, 94, 104, 2)
+
+        self.assertIn(setup_type, {"Breakdown", "Bear Flag", "Moving Average Rejection"})
+        self.assertLess(entry, 95)
+
+    def test_market_regime_from_spy(self) -> None:
+        index = pd.date_range(end=datetime(2026, 6, 17), periods=220, freq="B")
+        close = np.linspace(100, 150, len(index))
+        frame = pd.DataFrame({"Close": close}, index=index)
+
+        self.assertEqual(market_regime_from_spy(frame), "Bullish")
 
 
 if __name__ == "__main__":

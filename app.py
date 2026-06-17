@@ -320,12 +320,16 @@ with tabs[9]:
                     column
                     for column in [
                         "Ticker",
+                        "Direction",
                         "Setup Type",
+                        "Market Regime",
                         "Current Price",
                         "Entry Price",
                         "Stop Loss",
                         "Risk/Reward T2",
                         "Trade Quality Score",
+                        "Long Trade Quality Score",
+                        "Short Trade Quality Score",
                         "Rejected Reasons",
                     ]
                     if column in rejected_setups.columns
@@ -339,8 +343,10 @@ with tabs[9]:
         visible_columns = [
             "Ticker",
             "Company",
+            "Direction",
             "Setup Class",
             "Setup Type",
+            "Market Regime",
             "Current Price",
             "Entry Price",
             "Stop Loss",
@@ -375,6 +381,8 @@ with tabs[9]:
         st.write(f"**Catalysts:** {selected_setup['Catalysts']}")
         st.write(f"**Invalidation:** {selected_setup['Invalidation']}")
         st.write(f"**Take-Profit Notes:** {selected_setup['Take-Profit Notes']}")
+        if selected_setup.get("Direction") == "SHORT":
+            st.write(f"**Short Sale Warnings:** {selected_setup.get('Short Sale Warnings', '')}")
         st.write(f"**Notes:** {selected_setup['Notes']}")
 
     export_cols = st.columns(2)
