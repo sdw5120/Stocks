@@ -1,0 +1,143 @@
+Symbol,Tier,Category
+MSFT,Tier 1: Core Compounders,Technology
+AAPL,Tier 1: Core Compounders,Technology
+NVDA,Tier 1: Core Compounders,Technology
+META,Tier 1: Core Compounders,Technology
+AMZN,Tier 1: Core Compounders,Technology
+GOOGL,Tier 1: Core Compounders,Technology
+ORCL,Tier 1: Core Compounders,Technology
+ADBE,Tier 1: Core Compounders,Technology
+CRM,Tier 1: Core Compounders,Technology
+NOW,Tier 1: Core Compounders,Technology
+AMD,Tier 1: Core Compounders,Semiconductors
+AVGO,Tier 1: Core Compounders,Semiconductors
+TSM,Tier 1: Core Compounders,Semiconductors
+MU,Tier 1: Core Compounders,Semiconductors
+ARM,Tier 1: Core Compounders,Semiconductors
+ASML,Tier 1: Core Compounders,Semiconductors
+LRCX,Tier 1: Core Compounders,Semiconductors
+KLAC,Tier 1: Core Compounders,Semiconductors
+AMAT,Tier 1: Core Compounders,Semiconductors
+QCOM,Tier 1: Core Compounders,Semiconductors
+JPM,Tier 1: Core Compounders,Financials
+GS,Tier 1: Core Compounders,Financials
+V,Tier 1: Core Compounders,Financials
+MA,Tier 1: Core Compounders,Financials
+BRK.B,Tier 1: Core Compounders,Financials
+BLK,Tier 1: Core Compounders,Financials
+COST,Tier 1: Core Compounders,Consumer
+WMT,Tier 1: Core Compounders,Consumer
+TJX,Tier 1: Core Compounders,Consumer
+MCD,Tier 1: Core Compounders,Consumer
+CMG,Tier 1: Core Compounders,Consumer
+NFLX,Tier 1: Core Compounders,Consumer
+DIS,Tier 1: Core Compounders,Consumer
+GE,Tier 1: Core Compounders,Industrial
+ETN,Tier 1: Core Compounders,Industrial
+PH,Tier 1: Core Compounders,Industrial
+RTX,Tier 1: Core Compounders,Industrial
+CAT,Tier 1: Core Compounders,Industrial
+LLY,Tier 1: Core Compounders,Healthcare
+NVO,Tier 1: Core Compounders,Healthcare
+ISRG,Tier 1: Core Compounders,Healthcare
+UNH,Tier 1: Core Compounders,Healthcare
+ABBV,Tier 1: Core Compounders,Healthcare
+PLTR,Tier 2: Growth Leaders,Software & AI
+SNOW,Tier 2: Growth Leaders,Software & AI
+CRWD,Tier 2: Growth Leaders,Software & AI
+DDOG,Tier 2: Growth Leaders,Software & AI
+MDB,Tier 2: Growth Leaders,Software & AI
+HUBS,Tier 2: Growth Leaders,Software & AI
+DUOL,Tier 2: Growth Leaders,Software & AI
+NET,Tier 2: Growth Leaders,Software & AI
+CFLT,Tier 2: Growth Leaders,Software & AI
+PATH,Tier 2: Growth Leaders,Software & AI
+SOFI,Tier 2: Growth Leaders,Fintech
+HOOD,Tier 2: Growth Leaders,Fintech
+AFRM,Tier 2: Growth Leaders,Fintech
+NU,Tier 2: Growth Leaders,Fintech
+COIN,Tier 2: Growth Leaders,Fintech
+PANW,Tier 2: Growth Leaders,Cybersecurity
+ZS,Tier 2: Growth Leaders,Cybersecurity
+FTNT,Tier 2: Growth Leaders,Cybersecurity
+S,Tier 2: Growth Leaders,Cybersecurity
+CELH,Tier 2: Growth Leaders,Consumer Growth
+HIMS,Tier 2: Growth Leaders,Consumer Growth
+ELF,Tier 2: Growth Leaders,Consumer Growth
+CAVA,Tier 2: Growth Leaders,Consumer Growth
+RDDT,Tier 2: Growth Leaders,Consumer Growth
+SPOT,Tier 2: Growth Leaders,Consumer Growth
+GTLB,Tier 2: Growth Leaders,Cloud/Data
+ESTC,Tier 2: Growth Leaders,Cloud/Data
+AI,Tier 2: Growth Leaders,Cloud/Data
+WK,Tier 2: Growth Leaders,Cloud/Data
+MNDY,Tier 2: Growth Leaders,Cloud/Data
+SYM,Tier 2: Growth Leaders,Robotics/Automation
+SERV,Tier 2: Growth Leaders,Robotics/Automation
+ABB,Tier 2: Growth Leaders,Robotics/Automation
+ROCK,Tier 2: Growth Leaders,Robotics/Automation
+ASTS,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+RKLB,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+LUNR,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+RDW,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+PL,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+BKSY,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+SATL,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+SPIR,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+SIDU,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+VSAT,Tier 3: Space & Frontier Tech,Space & Frontier Tech
+IRDM,Tier 3: Space & Frontier Tech,Adjacent
+GSAT,Tier 3: Space & Frontier Tech,Adjacent
+MDA,Tier 3: Space & Frontier Tech,Adjacent
+KTOS,Tier 3: Space & Frontier Tech,Adjacent
+AVAV,Tier 3: Space & Frontier Tech,Adjacent
+ACHR,Tier 3: Space & Frontier Tech,Adjacent
+JOBY,Tier 3: Space & Frontier Tech,Adjacent
+EH,Tier 3: Space & Frontier Tech,Adjacent
+ENVX,Tier 3: Space & Frontier Tech,Adjacent
+QS,Tier 3: Space & Frontier Tech,Adjacent
+IONQ,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+RGTI,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+QBTS,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+QUBT,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+TEM,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+RXRX,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+ABCL,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+CRSP,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+BEAM,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+NTLA,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth
+SMR,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+OKLO,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+NNE,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+LTBR,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+UEC,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+CCJ,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+URNM,Tier 4: Small-Cap Speculative Growth,Energy & Materials
+MVST,Tier 4: Small-Cap Speculative Growth,EV & Battery
+FREY,Tier 4: Small-Cap Speculative Growth,EV & Battery
+SES,Tier 4: Small-Cap Speculative Growth,EV & Battery
+APP,Tier 4: Small-Cap Speculative Growth,Other
+APLD,Tier 4: Small-Cap Speculative Growth,Other
+CRDO,Tier 4: Small-Cap Speculative Growth,Other
+MSTR,Tier 4: Small-Cap Speculative Growth,Other
+HUT,Tier 4: Small-Cap Speculative Growth,Other
+CLSK,Tier 4: Small-Cap Speculative Growth,Other
+MARA,Tier 4: Small-Cap Speculative Growth,Other
+RIOT,Tier 4: Small-Cap Speculative Growth,Other
+UPST,Tier 4: Small-Cap Speculative Growth,Other
+BBAI,Tier 4: Small-Cap Speculative Growth,Other
+SPY,Tier 5: ETFs,ETFs
+QQQ,Tier 5: ETFs,ETFs
+IWM,Tier 5: ETFs,ETFs
+DIA,Tier 5: ETFs,ETFs
+SMH,Tier 5: ETFs,ETFs
+IGV,Tier 5: ETFs,ETFs
+XLF,Tier 5: ETFs,ETFs
+XLK,Tier 5: ETFs,ETFs
+XLE,Tier 5: ETFs,ETFs
+XLI,Tier 5: ETFs,ETFs
+XLY,Tier 5: ETFs,ETFs
+ARKK,Tier 5: ETFs,ETFs
+IBIT,Tier 5: ETFs,ETFs
+HACK,Tier 5: ETFs,ETFs
+SOXX,Tier 5: ETFs,ETFs

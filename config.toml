@@ -1,0 +1,27 @@
+[paths]
+watchlist = "watchlist.csv"
+daily_candidates = "daily_candidates.csv"
+database = "research.db"
+
+[market_data]
+period = "18mo"
+min_history_days = 210
+
+[earnings]
+window_days = 14
+
+[news]
+headlines_per_ticker = 5
+
+[alerts]
+enabled = false
+discord_webhook_url = ""
+
+[alerts.email]
+enabled = false
+smtp_host = ""
+smtp_port = 587
+smtp_username = ""
+smtp_password = ""
+from = ""
+to = ""

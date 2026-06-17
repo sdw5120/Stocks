@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.streamlit/secrets.toml
+
+# Local runtime data
+research.db
+research.db-*
+research.log
+daily_candidates.csv
+ranking_*.csv
+ranking_recommendations.txt
+trade_setups.csv
+trade_setups.json
+trade_setups_rejected.csv
+
+# Local tooling downloaded by Codex
+tools/
