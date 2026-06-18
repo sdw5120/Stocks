@@ -24,6 +24,7 @@ from trade_setups import (
     SetupConfig,
     export_trade_setups,
     generate_trade_setups,
+    take_profit_plan,
 )
 
 
@@ -122,19 +123,70 @@ def cached_trade_setups(
     max_risk_percent: float,
 ) -> pd.DataFrame:
     if SETUPS_CSV.exists():
-        return pd.read_csv(SETUPS_CSV)
+        return apply_risk_inputs(pd.read_csv(SETUPS_CSV), portfolio_size, max_risk_percent)
     candidates = cached_candidates(refresh_key, output_mtime)
     setup_config = SetupConfig(portfolio_size=portfolio_size, max_risk_percent=max_risk_percent)
     setups = generate_trade_setups(candidates, setup_config)
     export_trade_setups(setups, setup_config)
-    return setups
+    return apply_risk_inputs(setups, portfolio_size, max_risk_percent)
 
 
 @st.cache_data(show_spinner=False)
-def cached_rejected_trade_setups(rejected_mtime: float) -> pd.DataFrame:
+def cached_rejected_trade_setups(rejected_mtime: float, portfolio_size: float, max_risk_percent: float) -> pd.DataFrame:
     if not REJECTED_SETUPS_CSV.exists():
         return pd.DataFrame()
-    return pd.read_csv(REJECTED_SETUPS_CSV)
+    return apply_risk_inputs(pd.read_csv(REJECTED_SETUPS_CSV), portfolio_size, max_risk_percent)
+
+
+def apply_risk_inputs(setups: pd.DataFrame, portfolio_size: float, max_risk_percent: float) -> pd.DataFrame:
+    if setups.empty or "Entry Price" not in setups.columns or "Stop Loss" not in setups.columns:
+        return setups
+
+    adjusted = setups.copy()
+    risk_dollars = round(float(portfolio_size) * (float(max_risk_percent) / 100), 2)
+    adjusted["Portfolio Size"] = float(portfolio_size)
+    adjusted["Max Risk %"] = float(max_risk_percent)
+    adjusted["Max Dollar Risk"] = risk_dollars
+
+    for index, row in adjusted.iterrows():
+        entry = pd.to_numeric(row.get("Entry Price"), errors="coerce")
+        stop = pd.to_numeric(row.get("Stop Loss"), errors="coerce")
+        target_2 = pd.to_numeric(row.get("Target 2"), errors="coerce")
+        direction = str(row.get("Direction", "LONG")).upper()
+        if pd.isna(entry) or pd.isna(stop):
+            continue
+
+        risk_per_share = stop - entry if direction == "SHORT" else entry - stop
+        if pd.isna(risk_per_share) or risk_per_share <= 0:
+            shares = 0
+        else:
+            shares = int(np.floor(risk_dollars / risk_per_share))
+
+        adjusted.at[index, "Risk Per Share"] = round(float(risk_per_share), 2) if risk_per_share > 0 else np.nan
+        adjusted.at[index, "Position Size"] = shares
+        adjusted.at[index, "Position Cost"] = round(shares * float(entry), 2)
+
+        if pd.notna(target_2):
+            reward_per_share = entry - target_2 if direction == "SHORT" else target_2 - entry
+            adjusted.at[index, "Reward Per Share"] = round(float(reward_per_share), 2)
+
+        first_slice, second_slice, third_slice = take_profit_plan(shares)
+        if direction == "SHORT":
+            adjusted.at[index, "Shares To Sell At Target 1"] = 0
+            adjusted.at[index, "Shares To Sell At Target 2"] = 0
+            adjusted.at[index, "Shares To Sell At Target 3"] = 0
+            adjusted.at[index, "Shares To Cover At Target 1"] = first_slice
+            adjusted.at[index, "Shares To Cover At Target 2"] = second_slice
+            adjusted.at[index, "Shares To Cover At Target 3"] = third_slice
+        else:
+            adjusted.at[index, "Shares To Sell At Target 1"] = first_slice
+            adjusted.at[index, "Shares To Sell At Target 2"] = second_slice
+            adjusted.at[index, "Shares To Sell At Target 3"] = third_slice
+            adjusted.at[index, "Shares To Cover At Target 1"] = 0
+            adjusted.at[index, "Shares To Cover At Target 2"] = 0
+            adjusted.at[index, "Shares To Cover At Target 3"] = 0
+
+    return adjusted
 
 
 with st.sidebar:
@@ -142,11 +194,6 @@ with st.sidebar:
     refresh = st.button("Refresh research data", type="primary")
     min_score = st.slider("Minimum final score", 0, 100, 50)
     top_n = st.number_input("Rows to show", min_value=5, max_value=250, value=50, step=5)
-
-    st.divider()
-    st.subheader("Trade Setup Inputs")
-    portfolio_size = st.number_input("Portfolio size", min_value=1_000.0, max_value=100_000_000.0, value=100_000.0, step=1_000.0)
-    max_risk_percent = st.number_input("Max risk per trade %", min_value=0.1, max_value=10.0, value=1.0, step=0.1)
 
     st.divider()
     watchlist = cached_watchlist(file_mtime(WATCHLIST_PATH))
@@ -176,8 +223,6 @@ perf_trades, perf_summary, factor_value, perf_recommendations = cached_performan
 setup_perf_trades, setup_perf_summary, setup_factor_value, setup_perf_recommendations = cached_setup_performance(
     refresh_key, file_mtime(DATABASE_PATH)
 )
-trade_setups = cached_trade_setups(refresh_key, file_mtime(OUTPUT_PATH), portfolio_size, max_risk_percent)
-rejected_trade_setups = cached_rejected_trade_setups(file_mtime(REJECTED_SETUPS_CSV))
 filtered = candidates[candidates["FinalScore"] >= min_score].head(int(top_n))
 earnings_flag = (
     candidates["EarningsWithin14Days"].fillna(False).astype(bool)
@@ -345,7 +390,31 @@ with tabs[8]:
     for recommendation in setup_perf_recommendations:
         st.write(f"- {recommendation}")
 
-with tabs[9]:
+@st.fragment
+def render_trade_setups_tab(output_mtime: float, rejected_mtime: float) -> None:
+    with st.form("trade_setup_risk_form"):
+        input_cols = st.columns(2)
+        portfolio_size = input_cols[0].number_input(
+            "Portfolio size",
+            min_value=1_000.0,
+            max_value=100_000_000.0,
+            value=100_000.0,
+            step=1_000.0,
+            key="trade_setups_portfolio_size",
+        )
+        max_risk_percent = input_cols[1].number_input(
+            "Max risk per trade %",
+            min_value=0.1,
+            max_value=10.0,
+            value=1.0,
+            step=0.1,
+            key="trade_setups_max_risk_percent",
+        )
+        st.form_submit_button("Recalculate trade setups", type="primary")
+
+    trade_setups = cached_trade_setups(0, output_mtime, portfolio_size, max_risk_percent)
+    rejected_trade_setups = cached_rejected_trade_setups(rejected_mtime, portfolio_size, max_risk_percent)
+
     st.subheader("Trade Setups")
     st.caption("Research-only setups. The system does not connect to a brokerage or place trades.")
 
@@ -450,3 +519,7 @@ with tabs[9]:
     if SETUPS_JSON.exists():
         with SETUPS_JSON.open("rb") as setup_json:
             export_cols[1].download_button("Download trade_setups.json", setup_json, file_name=SETUPS_JSON.name, mime="application/json")
+
+
+with tabs[9]:
+    render_trade_setups_tab(file_mtime(OUTPUT_PATH), file_mtime(REJECTED_SETUPS_CSV))
