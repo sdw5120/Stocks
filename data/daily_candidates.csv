@@ -1,0 +1,152 @@
+Rank,Symbol,Tier,Category,FinalScore,Rating,TechnicalScore,CatalystScore,RelativeStrengthScore,Close,MA20,MA50,MA200,RelativeVolume,Return3M,SPYReturn3M,RelativeStrength3M,EarningsDate,DaysUntilEarnings,EarningsWithin14Days,Volume,AsOf,Status,CrossedMA50,CrossedMA200,Made52WeekHigh
+1,APLD,Tier 4: Small-Cap Speculative Growth,Other,86.4,Buy Candidate,89.7,8.0,92.6,45.57,44.65,39.18,31.06,1.18,70.99,12.02,58.97,,,False,26946000.0,2026-06-17,OK,False,False,False
+2,AMD,Tier 1: Core Compounders,Semiconductors,86.1,Buy Candidate,85.7,8.0,99.3,512.48,497.37,404.94,259.28,0.86,156.93,12.02,144.91,,,False,26981000.0,2026-06-17,OK,False,False,False
+3,FTNT,Tier 2: Growth Leaders,Cybersecurity,82.7,Buy Candidate,89.9,7.0,93.9,144.14,140.6,112.83,89.56,1.19,72.85,12.02,60.83,,,False,7646800.0,2026-06-17,OK,False,False,False
+4,AMAT,Tier 1: Core Compounders,Semiconductors,82.5,Buy Candidate,90.6,7.0,91.2,592.92,492.41,441.04,315.52,1.25,69.66,12.02,57.64,,,False,11022700.0,2026-06-17,OK,False,False,False
+5,KLAC,Tier 1: Core Compounders,Semiconductors,81.0,Buy Candidate,88.9,7.0,87.2,238.73,211.07,191.88,143.53,1.11,61.05,12.02,49.02,,,False,13203100.0,2026-06-17,OK,False,False,False
+6,SMH,Tier 5: ETFs,ETFs,80.0,Buy Candidate,87.1,7.0,85.8,623.97,602.85,542.85,409.34,0.97,58.5,12.02,46.48,,,False,10632500.0,2026-06-17,OK,False,False,False
+7,IRDM,Tier 3: Space & Frontier Tech,Adjacent,79.8,Buy Candidate,72.1,8.0,94.6,45.05,47.98,43.07,25.97,0.96,76.53,12.02,64.5,,,False,2582900.0,2026-06-17,OK,False,False,False
+8,ARM,Tier 1: Core Compounders,Semiconductors,78.4,Buy Candidate,85.9,6.0,100.0,418.88,353.16,258.72,166.3,0.87,226.33,12.02,214.31,,,False,11604000.0,2026-06-17,OK,False,False,False
+9,TJX,Tier 1: Core Compounders,Consumer,78.4,Buy Candidate,84.0,9.0,43.9,164.13,160.55,157.78,152.25,0.72,7.37,12.02,-4.66,,,False,4496800.0,2026-06-17,OK,False,False,False
+10,CRWD,Tier 2: Growth Leaders,Software & AI,75.9,Buy Candidate,67.3,8.0,85.1,682.96,687.53,560.39,488.05,0.59,56.71,12.02,44.69,,,False,2095400.0,2026-06-17,OK,False,False,False
+11,QCOM,Tier 1: Core Compounders,Semiconductors,72.4,Watch,67.0,7.0,87.8,212.97,224.29,189.46,166.48,0.56,63.23,12.02,51.21,,,False,11919900.0,2026-06-17,OK,False,False,False
+12,SATL,Tier 3: Space & Frontier Tech,Space & Frontier Tech,70.3,Watch,47.5,8.0,96.6,6.17,8.16,7.69,4.25,0.6,108.45,12.02,96.42,,,False,6167300.0,2026-06-17,OK,False,False,False
+13,HIMS,Tier 2: Growth Leaders,Consumer Growth,67.5,Watch,60.6,7.0,76.4,31.89,27.08,26.32,33.39,1.25,37.75,12.02,25.73,,,False,23086800.0,2026-06-17,OK,False,False,False
+14,RTX,Tier 1: Core Compounders,Industrial,65.4,Watch,71.8,8.0,23.3,192.58,179.6,181.85,182.3,1.35,-5.86,12.02,-17.88,,,False,7528000.0,2026-06-17,OK,False,False,False
+15,MDA,Tier 3: Space & Frontier Tech,Adjacent,63.0,Watch,50.5,8.0,54.1,38.96,41.05,36.66,,1.64,15.75,12.02,3.72,,,False,2481400.0,2026-06-17,Limited history,False,False,False
+16,NET,Tier 2: Growth Leaders,Software & AI,61.8,Watch,68.4,7.0,32.4,226.87,235.81,217.5,207.4,0.67,0.62,12.02,-11.41,,,False,2656900.0,2026-06-17,OK,False,False,False
+17,AI,Tier 2: Growth Leaders,Cloud/Data,56.9,Watch,40.8,7.0,62.8,10.29,10.47,9.59,12.73,0.87,19.51,12.02,7.49,,,False,7308500.0,2026-06-17,OK,False,False,False
+18,SOFI,Tier 2: Growth Leaders,Fintech,56.6,Watch,54.3,7.0,34.5,17.42,16.74,16.91,22.73,1.54,1.4,12.02,-10.63,,,False,121878200.0,2026-06-17,OK,False,False,False
+19,GTLB,Tier 2: Growth Leaders,Cloud/Data,56.2,Watch,41.7,7.0,57.4,26.47,28.92,25.15,34.56,0.94,16.97,12.02,4.94,,,False,6826700.0,2026-06-17,OK,False,False,False
+20,HUT,Tier 4: Small-Cap Speculative Growth,Other,55.4,Watch,89.6,0.0,98.0,118.88,117.86,97.13,59.3,1.17,140.84,12.02,128.82,,,False,4711800.0,2026-06-17,OK,False,False,False
+21,NVO,Tier 1: Core Compounders,Healthcare,55.0,Watch,39.7,7.0,55.4,43.52,43.74,42.82,48.22,0.77,16.21,12.02,4.18,,,False,9849400.0,2026-06-17,OK,False,False,False
+22,MU,Tier 1: Core Compounders,Semiconductors,53.7,Watch,85.6,0.0,97.3,1043.19,945.48,718.25,395.67,0.85,125.93,12.02,113.91,,,False,45552800.0,2026-06-17,OK,False,False,False
+23,CRDO,Tier 4: Small-Cap Speculative Growth,Other,53.6,Watch,84.6,0.0,98.6,249.33,227.39,194.1,152.87,0.76,145.11,12.02,133.09,,,False,7452700.0,2026-06-17,OK,False,False,False
+24,SOXX,Tier 5: ETFs,ETFs,53.1,Watch,85.1,0.0,95.3,599.73,573.39,502.76,358.17,0.81,77.28,12.02,65.26,,,False,8905500.0,2026-06-17,OK,False,False,False
+25,RIOT,Tier 4: Small-Cap Speculative Growth,Other,52.9,Watch,84.3,0.0,95.9,27.43,26.29,22.41,17.74,0.74,94.54,12.02,82.52,,,False,11348200.0,2026-06-17,OK,False,False,False
+26,LRCX,Tier 1: Core Compounders,Semiconductors,52.9,Watch,87.9,0.0,88.5,374.18,332.38,295.31,208.61,1.03,66.52,12.02,54.49,,,False,10879800.0,2026-06-17,OK,False,False,False
+27,BLK,Tier 1: Core Compounders,Financials,52.8,Watch,49.0,6.0,45.9,1057.38,1034.83,1046.64,1069.99,1.12,9.2,12.02,-2.83,,,False,781500.0,2026-06-17,OK,False,False,False
+28,XOM,User Added,Screenshot Import,52.6,Watch,42.6,8.0,17.6,140.74,148.91,150.62,134.4,1.01,-10.69,12.02,-22.72,,,False,16660800.0,2026-06-17,OK,False,False,False
+29,HOOD,Tier 2: Growth Leaders,Fintech,52.1,Watch,90.0,0.0,80.4,105.2,86.4,82.08,102.75,2.1,40.45,12.02,28.43,,,False,70547100.0,2026-06-17,OK,False,True,False
+30,ASML,Tier 1: Core Compounders,Semiconductors,51.5,Watch,89.9,0.0,77.7,1867.83,1713.57,1569.82,1261.6,1.19,37.83,12.02,25.81,,,False,2318300.0,2026-06-17,OK,False,False,False
+31,PANW,Tier 2: Growth Leaders,Cybersecurity,51.0,Watch,82.9,0.0,89.2,282.13,271.5,222.3,195.65,0.63,67.03,12.02,55.01,,,False,5707600.0,2026-06-17,OK,False,False,False
+32,UNH,Tier 1: Core Compounders,Healthcare,50.5,Watch,85.7,0.0,81.1,399.53,393.4,370.77,333.09,0.86,40.52,12.02,28.49,,,False,5832700.0,2026-06-17,OK,False,False,False
+33,CAT,Tier 1: Core Compounders,Industrial,50.3,Watch,87.3,0.0,77.0,955.92,903.83,868.66,667.5,0.99,37.82,12.02,25.79,,,False,2742600.0,2026-06-17,OK,False,False,False
+34,APP,Tier 4: Small-Cap Speculative Growth,Other,50.3,Watch,23.5,8.0,44.6,479.49,535.98,490.34,542.31,1.08,8.34,12.02,-3.68,,,False,5459700.0,2026-06-17,OK,False,False,False
+35,ASTS,Tier 3: Space & Frontier Tech,Space & Frontier Tech,50.1,Watch,53.6,6.0,23.3,85.43,101.16,88.74,80.3,1.09,-5.85,12.02,-17.88,,,False,30226900.0,2026-06-17,OK,False,False,False
+36,BEAM,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,49.8,Pass,89.0,0.0,70.9,32.48,30.27,29.99,26.91,1.12,28.28,12.02,16.25,,,False,2173700.0,2026-06-17,OK,False,False,False
+37,GS,Tier 1: Core Compounders,Financials,49.7,Pass,86.5,0.0,75.7,1099.14,1036.0,970.05,874.81,0.92,36.46,12.02,24.43,,,False,2179300.0,2026-06-17,OK,False,False,False
+38,AFRM,Tier 2: Growth Leaders,Fintech,49.5,Pass,80.5,0.0,86.5,70.73,68.59,64.98,66.72,1.24,59.23,12.02,47.21,,,False,6209100.0,2026-06-17,OK,False,False,False
+39,TSM,Tier 1: Core Compounders,Semiconductors,48.5,Pass,86.2,0.0,70.3,432.15,423.93,403.69,333.98,0.9,27.26,12.02,15.24,,,False,10911100.0,2026-06-17,OK,False,False,False
+40,IWM,Tier 5: ETFs,ETFs,48.4,Pass,91.9,0.0,58.1,289.88,288.2,280.65,257.7,1.35,17.83,12.02,5.8,,,False,39851300.0,2026-06-17,OK,False,False,False
+41,JPM,Tier 1: Core Compounders,Financials,47.6,Pass,91.7,0.0,54.7,333.46,309.31,308.52,306.97,1.34,15.89,12.02,3.87,,,False,12242100.0,2026-06-17,OK,False,False,False
+42,GE,Tier 1: Core Compounders,Industrial,47.5,Pass,88.0,0.0,61.5,357.03,324.2,306.74,305.02,1.04,18.63,12.02,6.61,,,False,5027300.0,2026-06-17,OK,False,False,False
+43,CFG,User Added,Screenshot Import,47.4,Pass,88.9,0.0,59.1,66.78,64.11,63.96,58.65,1.11,17.92,12.02,5.9,,,False,4914300.0,2026-06-17,OK,False,False,False
+44,MARA,Tier 4: Small-Cap Speculative Growth,Other,47.3,Pass,75.9,0.0,84.5,13.92,13.86,12.54,12.55,0.87,56.05,12.02,44.03,,,False,34299800.0,2026-06-17,OK,False,False,False
+45,LLY,Tier 1: Core Compounders,Healthcare,46.7,Pass,84.3,0.0,64.9,1112.0,1103.74,1008.19,964.27,0.75,21.13,12.02,9.1,,,False,2382000.0,2026-06-17,OK,False,False,False
+46,CRWV,User Added,Screenshot Import,46.6,Pass,76.7,0.0,79.7,115.21,106.8,110.79,100.27,0.93,39.11,12.02,27.08,,,False,26503400.0,2026-06-17,OK,False,False,False
+47,NTLA,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,46.3,Pass,89.1,0.0,53.4,15.2,13.35,13.72,13.45,1.92,15.06,12.02,3.04,,,False,12422200.0,2026-06-17,OK,False,False,False
+48,GEV,User Added,Screenshot Import,46.2,Pass,82.0,0.0,66.9,1048.86,976.45,1018.84,769.99,1.36,22.18,12.02,10.15,,,False,3988500.0,2026-06-17,OK,True,False,False
+49,CLSK,Tier 4: Small-Cap Speculative Growth,Other,45.9,Pass,68.7,0.0,91.9,16.78,16.82,14.18,13.01,0.7,69.84,12.02,57.81,,,False,16668300.0,2026-06-17,OK,False,False,False
+50,RKLB,Tier 3: Space & Frontier Tech,Space & Frontier Tech,45.9,Pass,72.9,0.0,83.8,107.98,121.84,103.14,73.5,1.03,55.41,12.02,43.39,,,False,28624900.0,2026-06-17,OK,False,False,False
+51,DIA,Tier 5: ETFs,ETFs,45.8,Pass,89.9,0.0,49.3,516.3,509.84,499.03,481.46,1.19,11.51,12.02,-0.51,,,False,6543900.0,2026-06-17,OK,False,False,False
+52,BBAI,Tier 4: Small-Cap Speculative Growth,Other,45.8,Pass,15.9,8.0,37.2,3.88,4.38,4.1,5.22,0.47,2.11,12.02,-9.92,,,False,22735400.0,2026-06-17,OK,False,False,False
+53,QS,Tier 3: Space & Frontier Tech,Adjacent,45.7,Pass,17.6,8.0,33.1,6.9,8.07,7.6,10.08,0.61,0.73,12.02,-11.29,,,False,12829000.0,2026-06-17,OK,False,False,False
+54,DDOG,Tier 2: Growth Leaders,Software & AI,45.6,Pass,67.4,0.0,93.2,226.63,234.35,183.93,151.0,0.6,72.66,12.02,60.63,,,False,3534800.0,2026-06-17,OK,False,False,False
+55,XLI,Tier 5: ETFs,ETFs,45.6,Pass,91.3,0.0,45.3,179.6,174.39,173.26,162.98,1.3,8.73,12.02,-3.29,,,False,11051500.0,2026-06-17,OK,False,False,False
+56,IONQ,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,45.1,Pass,67.8,0.0,89.9,54.69,62.07,51.88,49.22,0.63,68.9,12.02,56.88,,,False,19445400.0,2026-06-17,OK,False,False,False
+57,ABCL,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,44.6,Pass,70.0,0.0,83.1,5.44,5.5,4.73,4.25,0.8,54.55,12.02,42.52,,,False,5619400.0,2026-06-17,OK,False,False,False
+58,SNOW,Tier 2: Growth Leaders,Software & AI,43.7,Pass,72.1,0.0,74.3,234.52,226.21,178.16,205.71,0.56,35.37,12.02,23.34,,,False,6149100.0,2026-06-17,OK,False,False,False
+59,RDW,Tier 3: Space & Frontier Tech,Space & Frontier Tech,43.5,Pass,67.5,0.0,82.4,14.36,18.4,13.67,9.84,0.6,50.37,12.02,38.34,,,False,35611400.0,2026-06-17,OK,True,False,False
+60,XLK,Tier 5: ETFs,ETFs,43.4,Pass,71.9,0.0,73.0,185.8,186.04,171.12,149.0,0.95,34.68,12.02,22.65,,,False,14381800.0,2026-06-17,OK,False,False,False
+61,QQQ,Tier 5: ETFs,ETFs,42.4,Pass,73.3,0.0,65.5,722.51,725.5,690.49,627.76,1.07,21.45,12.02,9.43,,,False,51282500.0,2026-06-17,OK,False,False,False
+62,ARKK,Tier 5: ETFs,ETFs,42.1,Pass,81.9,0.0,46.6,78.49,77.65,76.78,78.12,1.35,9.91,12.02,-2.11,,,False,10767900.0,2026-06-17,OK,False,False,False
+63,XLF,Tier 5: ETFs,ETFs,41.8,Pass,80.8,0.0,47.3,54.05,52.21,51.89,52.55,1.27,10.37,12.02,-1.65,,,False,49561700.0,2026-06-17,OK,False,False,False
+64,AMGN,User Added,Screenshot Import,41.7,Pass,90.3,0.0,27.7,341.66,341.08,340.5,331.62,1.23,-2.79,12.02,-14.82,,,False,3469400.0,2026-06-17,OK,False,False,False
+65,SPY,Tier 5: ETFs,ETFs,41.6,Pass,78.9,0.0,50.0,740.96,746.8,728.24,687.83,1.51,12.02,12.02,0.0,,,False,85718600.0,2026-06-17,OK,False,False,False
+66,CELH,Tier 2: Growth Leaders,Consumer Growth,41.6,Pass,32.2,7.0,3.4,30.38,29.74,31.64,45.07,1.38,-26.8,12.02,-38.82,,,False,13680100.0,2026-06-17,OK,False,False,False
+67,ETN,Tier 1: Core Compounders,Industrial,41.0,Pass,76.6,0.0,52.0,409.64,400.39,404.38,368.42,0.92,13.62,12.02,1.59,,,False,2241800.0,2026-06-17,OK,False,False,False
+68,NEE,User Added,Screenshot Import,40.9,Pass,20.1,7.0,24.3,85.73,86.22,90.73,85.73,0.8,-5.75,12.02,-17.77,,,False,9600600.0,2026-06-17,OK,False,False,False
+69,HACK,Tier 5: ETFs,ETFs,40.6,Pass,68.4,0.0,66.2,95.38,96.96,87.46,83.09,0.67,22.08,12.02,10.05,,,False,95100.0,2026-06-17,OK,False,False,False
+70,AAPL,Tier 1: Core Compounders,Technology,40.4,Pass,70.6,0.0,60.8,295.95,303.61,287.96,267.85,0.85,18.41,12.02,6.38,,,False,42685500.0,2026-06-17,OK,False,False,False
+71,V,Tier 1: Core Compounders,Financials,40.0,Pass,76.0,0.0,48.0,330.38,324.44,320.67,329.21,0.88,10.49,12.02,-1.54,,,False,6892800.0,2026-06-17,OK,False,False,False
+72,ABBV,Tier 1: Core Compounders,Healthcare,40.0,Pass,78.4,0.0,43.2,221.23,219.81,211.67,220.54,1.07,6.19,12.02,-5.84,,,False,5624200.0,2026-06-17,OK,False,False,False
+73,NOW,Tier 1: Core Compounders,Technology,39.3,Pass,22.4,7.0,11.5,95.48,109.34,99.29,137.21,0.99,-16.03,12.02,-28.06,,,False,31952100.0,2026-06-17,OK,False,False,False
+74,PH,Tier 1: Core Compounders,Industrial,38.8,Pass,77.8,0.0,38.5,945.97,877.58,908.35,875.25,1.02,3.68,12.02,-8.34,,,False,845300.0,2026-06-17,OK,False,False,False
+75,TEM,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,38.6,Pass,10.5,7.0,31.8,48.79,48.94,49.87,64.4,0.84,0.21,12.02,-11.82,,,False,6040500.0,2026-06-17,OK,False,False,False
+76,BRK.B,Tier 1: Core Compounders,Financials,38.1,Pass,77.8,0.0,35.1,491.28,483.09,478.95,490.31,1.03,1.41,12.02,-10.62,,,False,5408600.0,2026-06-17,OK,False,False,False
+77,SPIR,Tier 3: Space & Frontier Tech,Space & Frontier Tech,37.7,Pass,49.0,0.0,90.5,18.15,19.81,19.06,12.52,0.72,68.99,12.02,56.97,,,False,1123400.0,2026-06-17,OK,False,False,False
+78,KO,User Added,Screenshot Import,37.3,Pass,72.7,0.0,41.2,79.93,80.43,78.88,73.65,1.02,5.21,12.02,-6.81,,,False,17051200.0,2026-06-17,OK,False,False,False
+79,GSAT,Tier 3: Space & Frontier Tech,Adjacent,37.1,Pass,55.2,0.0,75.0,80.01,82.09,81.08,61.54,1.21,36.35,12.02,24.33,,,False,1718400.0,2026-06-17,OK,False,False,False
+80,MDB,Tier 2: Growth Leaders,Software & AI,36.4,Pass,56.6,0.0,68.9,334.69,345.67,300.5,332.46,0.53,24.64,12.02,12.62,,,False,1503800.0,2026-06-17,OK,False,False,False
+81,DUOL,Tier 2: Growth Leaders,Software & AI,36.4,Pass,57.3,0.0,67.6,123.39,114.48,108.18,172.95,0.98,23.33,12.02,11.3,,,False,1354300.0,2026-06-17,OK,False,False,False
+82,CAVA,Tier 2: Growth Leaders,Consumer Growth,36.0,Pass,74.8,0.0,30.4,88.05,79.95,84.33,69.5,0.78,-0.99,12.02,-13.01,,,False,2652300.0,2026-06-17,OK,False,False,False
+83,VRT,User Added,Screenshot Import,35.9,Pass,58.0,0.0,63.5,317.58,312.74,320.5,222.9,1.04,19.97,12.02,7.95,,,False,6158000.0,2026-06-17,OK,False,False,False
+84,AVGO,Tier 1: Core Compounders,Semiconductors,35.5,Pass,54.7,0.0,68.2,392.9,414.06,410.46,359.39,1.18,24.36,12.02,12.34,,,False,39918800.0,2026-06-17,OK,False,False,False
+85,LTBR,Tier 4: Small-Cap Speculative Growth,Energy & Materials,34.8,Pass,10.2,7.0,13.5,9.29,10.46,11.65,15.28,0.81,-15.39,12.02,-27.42,,,False,834900.0,2026-06-17,OK,False,False,False
+86,SIDU,Tier 3: Space & Frontier Tech,Space & Frontier Tech,34.3,Pass,44.8,0.0,81.8,3.26,4.39,4.04,2.39,0.39,42.98,12.02,30.96,,,False,11327500.0,2026-06-17,OK,False,False,False
+87,VSAT,Tier 3: Space & Frontier Tech,Space & Frontier Tech,34.3,Pass,49.5,0.0,72.3,64.55,71.84,67.15,45.99,0.76,32.85,12.02,20.82,,,False,2448600.0,2026-06-17,OK,False,False,False
+88,WK,Tier 2: Growth Leaders,Cloud/Data,34.1,Pass,12.5,7.0,5.4,48.03,49.24,51.48,72.12,1.0,-22.13,12.02,-34.15,,,False,959100.0,2026-06-17,OK,False,False,False
+89,LUNR,Tier 3: Space & Frontier Tech,Space & Frontier Tech,33.4,Pass,48.6,0.0,69.6,22.72,32.92,29.7,18.18,0.69,25.46,12.02,13.43,,,False,12128100.0,2026-06-17,OK,False,False,False
+90,SERV,Tier 2: Growth Leaders,Robotics/Automation,32.1,Pass,8.8,7.0,2.7,6.69,8.09,8.67,10.7,0.7,-29.06,12.02,-41.08,,,False,4399600.0,2026-06-17,OK,False,False,False
+91,IBIT,Tier 5: ETFs,ETFs,32.0,Pass,10.6,6.0,18.9,36.36,38.74,41.81,49.37,0.85,-9.69,12.02,-21.71,,,False,42360000.0,2026-06-17,OK,False,False,False
+92,CFLT,Tier 2: Growth Leaders,Software & AI,32.0,Pass,0.0,8.0,0.0,,,,,,,,,,,False,,,No data,,,
+93,GOOGL,Tier 1: Core Compounders,Technology,31.9,Pass,49.6,0.0,60.1,363.79,372.67,366.36,310.32,0.77,18.23,12.02,6.21,,,False,24496700.0,2026-06-17,OK,False,False,False
+94,NNE,Tier 4: Small-Cap Speculative Growth,Energy & Materials,31.8,Pass,48.4,0.0,62.2,25.31,25.97,25.2,31.17,1.47,19.16,12.02,7.14,,,False,4731800.0,2026-06-17,OK,True,False,False
+95,BKSY,Tier 3: Space & Frontier Tech,Space & Frontier Tech,31.8,Pass,51.0,0.0,56.8,29.52,39.59,38.04,25.9,0.88,16.31,12.02,4.29,,,False,2098800.0,2026-06-17,OK,False,False,False
+96,QBTS,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,30.8,Pass,37.5,0.0,79.1,22.92,26.02,22.28,23.82,0.6,38.99,12.02,26.97,,,False,27498000.0,2026-06-17,OK,False,False,False
+97,COIN,Tier 2: Growth Leaders,Fintech,30.7,Pass,11.9,6.0,9.5,164.92,171.34,185.44,238.82,0.95,-18.47,12.02,-30.5,,,False,8084600.0,2026-06-17,OK,False,False,False
+98,NVDA,Tier 1: Core Compounders,Technology,30.0,Pass,49.2,0.0,51.4,204.65,212.43,208.74,189.7,0.74,13.44,12.02,1.42,,,False,127804800.0,2026-06-17,OK,False,False,False
+99,CRSP,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,29.9,Pass,50.4,0.0,48.6,53.09,52.19,52.7,55.53,1.23,11.32,12.02,-0.7,,,False,2096800.0,2026-06-17,OK,True,False,False
+100,PL,Tier 3: Space & Frontier Tech,Space & Frontier Tech,29.8,Pass,48.2,0.0,52.7,28.22,39.56,38.51,23.74,0.66,13.74,12.02,1.72,,,False,10694300.0,2026-06-17,OK,False,False,False
+101,RGTI,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,28.3,Pass,35.0,0.0,71.6,20.25,22.76,19.68,23.72,0.4,29.2,12.02,17.17,,,False,25707800.0,2026-06-17,OK,False,False,False
+102,AMZN,Tier 1: Core Compounders,Technology,27.5,Pass,43.3,0.0,50.7,237.5,254.31,256.64,232.71,1.06,13.17,12.02,1.14,,,False,44636700.0,2026-06-17,OK,False,False,False
+103,RDDT,Tier 2: Growth Leaders,Consumer Growth,27.3,Pass,40.1,0.0,56.1,165.95,166.74,160.66,187.96,0.81,16.22,12.02,4.2,,,False,4373000.0,2026-06-17,OK,False,False,False
+104,ROCK,Tier 2: Growth Leaders,Robotics/Automation,26.7,Pass,48.4,0.0,36.5,40.52,38.44,38.65,49.94,1.07,1.73,12.02,-10.29,,,False,394000.0,2026-06-17,OK,False,False,False
+105,XLE,Tier 5: ETFs,ETFs,25.1,Pass,52.0,0.0,21.6,54.67,57.56,57.53,50.87,0.96,-6.44,12.02,-18.46,,,False,38542700.0,2026-06-17,OK,False,False,False
+106,ESTC,Tier 2: Growth Leaders,Cloud/Data,23.7,Pass,39.1,0.0,40.5,58.56,60.34,53.3,68.37,0.73,5.02,12.02,-7.0,,,False,1794000.0,2026-06-17,OK,False,False,False
+107,UPST,Tier 4: Small-Cap Speculative Growth,Other,22.5,Pass,26.7,0.0,59.1,30.46,31.1,30.82,40.37,1.33,17.92,12.02,5.9,,,False,6358300.0,2026-06-17,OK,False,False,False
+108,ENVX,Tier 3: Space & Frontier Tech,Adjacent,22.3,Pass,16.6,0.0,78.4,6.69,7.24,6.78,7.81,0.53,38.22,12.02,26.2,,,False,3884700.0,2026-06-17,OK,False,False,False
+109,COST,Tier 1: Core Compounders,Consumer,21.9,Pass,39.9,0.0,29.7,965.59,986.69,1002.66,957.88,0.79,-1.46,12.02,-13.49,,,False,1924900.0,2026-06-17,OK,False,False,False
+110,QUBT,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,21.4,Pass,16.6,0.0,73.6,9.77,10.89,9.93,11.83,0.53,34.76,12.02,22.73,,,False,12845300.0,2026-06-17,OK,False,False,False
+111,WMT,Tier 1: Core Compounders,Consumer,21.4,Pass,40.0,0.0,27.0,118.13,119.31,125.3,116.37,0.8,-3.16,12.02,-15.18,,,False,21695000.0,2026-06-17,OK,False,False,False
+112,ELF,Tier 2: Growth Leaders,Consumer Growth,21.3,Pass,45.2,0.0,16.2,62.28,56.06,59.76,86.75,0.82,-11.42,12.02,-23.44,,,False,4016900.0,2026-06-17,OK,False,False,False
+113,CCJ,Tier 4: Small-Cap Speculative Growth,Energy & Materials,21.0,Pass,39.6,0.0,25.7,105.67,107.07,113.3,102.82,0.77,-3.41,12.02,-15.43,,,False,2536400.0,2026-06-17,OK,False,False,False
+114,ORCL,Tier 1: Core Compounders,Technology,20.0,Pass,18.0,0.0,64.2,183.53,205.41,187.57,205.15,0.64,20.03,12.02,8.01,,,False,16546700.0,2026-06-17,OK,False,False,False
+115,MP,User Added,Screenshot Import,18.0,Pass,23.6,0.0,42.6,60.84,61.87,62.34,62.21,1.08,5.74,12.02,-6.29,,,False,6918300.0,2026-06-17,OK,False,False,False
+116,XLY,Tier 5: ETFs,ETFs,17.8,Pass,24.6,0.0,39.9,115.49,117.73,117.58,117.64,1.17,4.45,12.02,-7.57,,,False,9065700.0,2026-06-17,OK,False,False,False
+117,NU,Tier 2: Growth Leaders,Fintech,17.5,Pass,33.2,0.0,20.9,12.89,12.45,13.52,15.4,1.46,-7.73,12.02,-19.75,,,False,97024600.0,2026-06-17,OK,False,False,False
+118,IGV,Tier 5: ETFs,ETFs,17.4,Pass,22.6,0.0,41.9,89.16,95.39,89.76,98.05,1.01,5.71,12.02,-6.31,,,False,19562700.0,2026-06-17,OK,False,False,False
+119,MA,Tier 1: Core Compounders,Financials,16.7,Pass,24.9,0.0,33.8,492.99,491.04,499.24,535.33,0.79,0.93,12.02,-11.1,,,False,2925800.0,2026-06-17,OK,False,False,False
+120,JOBY,Tier 3: Space & Frontier Tech,Adjacent,15.4,Pass,24.0,0.0,29.1,9.39,10.46,9.83,12.51,1.12,-1.57,12.02,-13.6,,,False,36556000.0,2026-06-17,OK,False,False,False
+121,CMG,Tier 1: Core Compounders,Consumer,15.1,Pass,23.6,0.0,28.4,31.86,31.21,32.69,35.87,0.69,-2.39,12.02,-14.41,,,False,14528100.0,2026-06-17,OK,False,False,False
+122,S,Tier 2: Growth Leaders,Cybersecurity,14.9,Pass,18.4,0.0,37.8,14.8,16.51,15.52,15.54,0.68,2.92,12.02,-9.1,,,False,6644500.0,2026-06-17,OK,False,False,False
+123,MSFT,Tier 1: Core Compounders,Technology,14.9,Pass,24.0,0.0,26.4,378.91,415.23,412.87,451.98,1.12,-3.29,12.02,-15.31,,,False,41835800.0,2026-06-17,OK,False,False,False
+124,MCD,Tier 1: Core Compounders,Consumer,13.8,Pass,25.4,0.0,18.2,283.82,280.62,287.66,305.48,0.84,-10.11,12.02,-22.13,,,False,3589500.0,2026-06-17,OK,False,False,False
+125,DIS,Tier 1: Core Compounders,Consumer,13.6,Pass,16.2,0.0,35.8,100.86,101.37,102.66,107.2,1.3,1.45,12.02,-10.58,,,False,11167100.0,2026-06-17,OK,False,False,False
+126,SES,Tier 4: Small-Cap Speculative Growth,EV & Battery,13.3,Pass,20.7,0.0,25.0,1.07,1.19,1.12,1.68,0.86,-3.6,12.02,-15.63,,,False,6467900.0,2026-06-17,OK,False,False,False
+127,MNDY,Tier 2: Growth Leaders,Cloud/Data,13.2,Pass,17.4,0.0,31.1,73.38,81.34,74.09,123.78,0.59,-0.8,12.02,-12.82,,,False,1130400.0,2026-06-17,OK,False,False,False
+128,EH,Tier 3: Space & Frontier Tech,Adjacent,12.2,Pass,9.7,2.0,1.4,7.06,8.62,9.68,13.23,0.78,-36.79,12.02,-48.82,,,False,1199700.0,2026-06-17,OK,False,False,False
+129,OKLO,Tier 4: Small-Cap Speculative Growth,Energy & Materials,11.7,Pass,9.7,0.0,39.2,58.82,62.79,64.82,85.1,0.77,3.74,12.02,-8.28,,,False,10770600.0,2026-06-17,OK,False,False,False
+130,ACHR,Tier 3: Space & Frontier Tech,Adjacent,11.7,Pass,20.9,0.0,16.9,5.36,5.99,5.97,7.74,0.87,-10.82,12.02,-22.84,,,False,47416400.0,2026-06-17,OK,False,False,False
+131,SPOT,Tier 2: Growth Leaders,Consumer Growth,11.5,Pass,20.9,0.0,15.5,455.6,493.15,479.38,557.24,0.87,-11.83,12.02,-23.85,,,False,2068500.0,2026-06-17,OK,False,False,False
+132,CRM,Tier 1: Core Compounders,Technology,11.4,Pass,25.1,0.0,6.8,155.02,178.91,178.59,216.88,1.21,-20.23,12.02,-32.26,,,False,19932000.0,2026-06-17,OK,False,False,False
+133,PATH,Tier 2: Growth Leaders,Software & AI,10.2,Pass,20.5,0.0,10.1,10.23,11.15,10.69,13.01,0.84,-17.83,12.02,-29.86,,,False,40457100.0,2026-06-17,OK,False,False,False
+134,URNM,Tier 4: Small-Cap Speculative Growth,Energy & Materials,10.0,Pass,15.2,0.0,19.6,57.08,58.23,62.93,62.21,0.42,-8.74,12.02,-20.77,,,False,329500.0,2026-06-17,OK,False,False,False
+135,META,Tier 1: Core Compounders,Technology,9.7,Pass,14.0,0.0,20.3,567.58,600.87,622.6,655.71,1.12,-7.81,12.02,-19.84,,,False,20397900.0,2026-06-17,OK,False,False,False
+136,RXRX,Tier 4: Small-Cap Speculative Growth,Small-Cap Speculative Growth,9.5,Pass,12.7,0.0,22.3,3.11,3.28,3.34,4.16,1.02,-6.33,12.02,-18.35,,,False,22097500.0,2026-06-17,OK,False,False,False
+137,SMR,Tier 4: Small-Cap Speculative Growth,Energy & Materials,9.5,Pass,16.3,0.0,14.9,10.34,11.21,11.5,20.85,1.3,-14.05,12.02,-26.07,,,False,47804800.0,2026-06-17,OK,False,False,False
+138,NFLX,Tier 1: Core Compounders,Consumer,8.7,Pass,17.4,0.0,8.8,76.96,83.64,89.67,98.57,1.39,-18.73,12.02,-30.76,,,False,50241500.0,2026-06-17,OK,False,False,False
+139,ADBE,Tier 1: Core Compounders,Technology,8.6,Pass,17.9,0.0,7.4,196.28,238.64,242.54,296.05,1.43,-20.21,12.02,-32.24,,,False,10707900.0,2026-06-17,OK,False,False,False
+140,AVAV,Tier 3: Space & Frontier Tech,Adjacent,8.0,Pass,17.6,0.0,4.7,167.11,183.54,183.24,258.47,0.61,-22.58,12.02,-34.6,,,False,772100.0,2026-06-17,OK,False,False,False
+141,ZS,Tier 2: Growth Leaders,Cybersecurity,7.3,Pass,15.3,0.0,6.1,124.38,141.32,141.0,212.33,0.43,-20.26,12.02,-32.29,,,False,3115700.0,2026-06-17,OK,False,False,False
+142,ISRG,Tier 1: Core Compounders,Healthcare,7.1,Pass,11.7,0.0,12.2,402.18,420.51,440.84,491.0,0.93,-15.81,12.02,-27.84,,,False,2236900.0,2026-06-17,OK,False,False,False
+143,PLTR,Tier 2: Growth Leaders,Software & AI,7.0,Pass,10.3,0.0,14.2,130.63,138.45,138.68,160.05,0.83,-14.49,12.02,-26.52,,,False,32161500.0,2026-06-17,OK,False,False,False
+144,UEC,Tier 4: Small-Cap Speculative Growth,Energy & Materials,7.0,Pass,11.0,0.0,12.8,11.42,12.61,13.8,13.94,0.88,-15.59,12.02,-27.62,,,False,10498200.0,2026-06-17,OK,False,False,False
+145,MSTR,Tier 4: Small-Cap Speculative Growth,Other,6.9,Pass,11.8,0.0,10.8,116.56,137.59,154.77,192.98,0.95,-17.07,12.02,-29.1,,,False,17901400.0,2026-06-17,OK,False,False,False
+146,HUBS,Tier 2: Growth Leaders,Software & AI,5.2,Pass,11.9,0.0,2.0,176.71,204.92,211.57,328.24,0.95,-32.58,12.02,-44.61,,,False,1938700.0,2026-06-17,OK,False,False,False
+147,SYM,Tier 2: Growth Leaders,Robotics/Automation,4.5,Pass,7.2,0.0,8.1,40.17,46.4,52.35,58.08,0.57,-19.76,12.02,-31.78,,,False,1518300.0,2026-06-17,OK,False,False,False
+148,MVST,Tier 4: Small-Cap Speculative Growth,EV & Battery,4.5,Pass,9.1,0.0,4.1,1.26,1.34,1.6,2.85,0.73,-26.74,12.02,-38.77,,,False,3197800.0,2026-06-17,OK,False,False,False
+149,KTOS,Tier 3: Space & Frontier Tech,Adjacent,3.6,Pass,8.6,0.0,0.7,56.16,58.6,61.49,80.07,0.69,-39.64,12.02,-51.66,,,False,3117900.0,2026-06-17,OK,False,False,False
+150,ABB,Tier 2: Growth Leaders,Robotics/Automation,0.0,Pass,0.0,0.0,0.0,,,,,,,,,,,False,,,No data,,,
+151,FREY,Tier 4: Small-Cap Speculative Growth,EV & Battery,0.0,Pass,0.0,0.0,0.0,,,,,,,,,,,False,,,No data,,,

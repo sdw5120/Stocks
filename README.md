@@ -49,6 +49,32 @@ The dashboard includes:
 - Latest Headlines
 - Historical Rankings
 
+## Streamlit Cloud Data
+
+Streamlit Community Cloud only receives files committed to GitHub. Local runtime files such as
+`research.db`, `daily_candidates.csv`, and `trade_setups.csv` are ignored at the repository root
+because they are regenerated during normal use.
+
+To make deployed apps useful immediately, this repo includes committed snapshot files in `data/`.
+The dashboard reads live local files first, then falls back to these snapshots when the live files do
+not exist on Streamlit Cloud.
+
+Tracked snapshots include:
+
+- `data/daily_candidates.csv`
+- `data/trade_setups.csv`
+- `data/trade_setups_rejected.csv`
+- `data/trade_setups.json`
+- `data/rankings_history.csv`
+- `data/news.csv`
+- `data/earnings.csv`
+- `data/ranking_forward_returns.csv`
+- `data/ranking_performance_summary.csv`
+- `data/ranking_factor_value.csv`
+
+Refresh data locally or in the app to generate new runtime files. When you want Streamlit Cloud to
+ship with a newer starting snapshot, copy those refreshed outputs into `data/`, commit, and push.
+
 ## Scoring
 
 Final score is 0-100:

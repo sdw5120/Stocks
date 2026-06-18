@@ -14,5 +14,10 @@ trade_setups.csv
 trade_setups.json
 trade_setups_rejected.csv
 
+# Streamlit Cloud seed/snapshot data
+!data/
+!data/*.csv
+!data/*.json
+
 # Local tooling downloaded by Codex
 tools/

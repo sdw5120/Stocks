@@ -1,0 +1,60 @@
+run_date,symbol,alert_type,message,delivered,inserted_at
+2026-06-18,APLD,Catalyst score >= 8,APLD catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,AMD,Catalyst score >= 8,AMD catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,IRDM,Catalyst score >= 8,IRDM catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,TJX,Catalyst score >= 8,TJX catalyst score is 9.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,CRWD,Catalyst score >= 8,CRWD catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,SATL,Catalyst score >= 8,SATL catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,RTX,Catalyst score >= 8,RTX catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,MDA,Catalyst score >= 8,MDA catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,XOM,Catalyst score >= 8,XOM catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,HOOD,Relative volume > 2x,HOOD relative volume is 2.10x.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,HOOD,200-day MA cross,HOOD crossed above its 200-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,APP,Catalyst score >= 8,APP catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,GEV,50-day MA cross,GEV crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,BBAI,Catalyst score >= 8,BBAI catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,QS,Catalyst score >= 8,QS catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,RDW,50-day MA cross,RDW crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,CFLT,50-day MA cross,CFLT crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,CFLT,200-day MA cross,CFLT crossed above its 200-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,CFLT,52-week high,CFLT made a 52-week high.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,CFLT,Catalyst score >= 8,CFLT catalyst score is 8.0.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,NNE,50-day MA cross,NNE crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,CRSP,50-day MA cross,CRSP crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,ABB,50-day MA cross,ABB crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,ABB,200-day MA cross,ABB crossed above its 200-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,ABB,52-week high,ABB made a 52-week high.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,FREY,50-day MA cross,FREY crossed above its 50-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,FREY,200-day MA cross,FREY crossed above its 200-day moving average.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-18,FREY,52-week high,FREY made a 52-week high.,0,2026-06-18T13:31:17.921770+00:00
+2026-06-17,HOOD,Relative volume > 2x,HOOD relative volume is 2.06x.,0,2026-06-17T20:08:32.710610+00:00
+2026-06-17,CRWD,Catalyst score >= 8,CRWD catalyst score is 8.0.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,GEV,50-day MA cross,GEV crossed above its 50-day moving average.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,APP,Catalyst score >= 8,APP catalyst score is 8.0.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,VRT,50-day MA cross,VRT crossed above its 50-day moving average.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,PLTR,Catalyst score >= 8,PLTR catalyst score is 8.0.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,MP,200-day MA cross,MP crossed above its 200-day moving average.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,SES,50-day MA cross,SES crossed above its 50-day moving average.,0,2026-06-17T18:52:57.696834+00:00
+2026-06-17,HOOD,200-day MA cross,HOOD crossed above its 200-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,RDW,50-day MA cross,RDW crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,NNE,50-day MA cross,NNE crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,CFLT,50-day MA cross,CFLT crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,CFLT,200-day MA cross,CFLT crossed above its 200-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,CFLT,52-week high,CFLT made a 52-week high.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,ENVX,50-day MA cross,ENVX crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,CRSP,50-day MA cross,CRSP crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,ABB,50-day MA cross,ABB crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,ABB,200-day MA cross,ABB crossed above its 200-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,ABB,52-week high,ABB made a 52-week high.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,FREY,50-day MA cross,FREY crossed above its 50-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,FREY,200-day MA cross,FREY crossed above its 200-day moving average.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,FREY,52-week high,FREY made a 52-week high.,0,2026-06-17T16:53:01.372701+00:00
+2026-06-17,RTX,Catalyst score >= 8,RTX catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,CFLT,Catalyst score >= 8,CFLT catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,RDW,Catalyst score >= 8,RDW catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,SATL,Catalyst score >= 8,SATL catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,IRDM,Catalyst score >= 8,IRDM catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,MDA,Catalyst score >= 8,MDA catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,QS,Catalyst score >= 8,QS catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,APLD,Catalyst score >= 8,APLD catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00
+2026-06-17,BBAI,Catalyst score >= 8,BBAI catalyst score is 8.0.,0,2026-06-17T16:22:29.378903+00:00

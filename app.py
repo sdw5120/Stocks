@@ -32,6 +32,7 @@ CONFIG = load_config()
 WATCHLIST_PATH = CONFIG.watchlist_path
 OUTPUT_PATH = CONFIG.output_path
 DATABASE_PATH = CONFIG.database_path
+SNAPSHOT_DIR = Path("data")
 
 
 st.set_page_config(page_title="Swing Trading Research", layout="wide")
@@ -48,10 +49,32 @@ def file_mtime(path: Path) -> float:
     return path.stat().st_mtime if path.exists() else 0.0
 
 
+def snapshot_path(path: Path) -> Path:
+    return SNAPSHOT_DIR / path.name
+
+
+def read_csv_with_snapshot(path: Path) -> pd.DataFrame:
+    if path.exists():
+        return pd.read_csv(path)
+    fallback = snapshot_path(path)
+    if fallback.exists():
+        return pd.read_csv(fallback)
+    return pd.DataFrame()
+
+
+def snapshot_mtime(path: Path) -> float:
+    return max(file_mtime(path), file_mtime(snapshot_path(path)))
+
+
 @st.cache_data(show_spinner=False)
 def cached_candidates(refresh_key: int, output_mtime: float) -> pd.DataFrame:
     if OUTPUT_PATH.exists() and refresh_key == 0:
         existing = pd.read_csv(OUTPUT_PATH)
+        if "FinalScore" in existing.columns:
+            return existing
+    snapshot = snapshot_path(OUTPUT_PATH)
+    if snapshot.exists() and refresh_key == 0:
+        existing = pd.read_csv(snapshot)
         if "FinalScore" in existing.columns:
             return existing
     return build_candidates(CONFIG)
@@ -85,7 +108,7 @@ def refresh_candidates_with_progress() -> pd.DataFrame:
 @st.cache_data(show_spinner=False)
 def cached_db_tables(refresh_key: int, database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     if not DATABASE_PATH.exists():
-        return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+        return cached_snapshot_db_tables(database_mtime)
     conn = init_db(DATABASE_PATH)
     earnings = pd.read_sql_query(
         """
@@ -100,19 +123,70 @@ def cached_db_tables(refresh_key: int, database_mtime: float) -> tuple[pd.DataFr
     catalysts = latest_catalysts(conn, 100)
     history = ranking_history(conn, 1000)
     conn.close()
+    if earnings.empty and news.empty and catalysts.empty and history.empty:
+        return cached_snapshot_db_tables(database_mtime)
+    return earnings, news, catalysts, history
+
+
+@st.cache_data(show_spinner=False)
+def cached_snapshot_db_tables(database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    earnings = pd.read_csv(SNAPSHOT_DIR / "earnings.csv") if (SNAPSHOT_DIR / "earnings.csv").exists() else pd.DataFrame()
+    news = pd.read_csv(SNAPSHOT_DIR / "news.csv") if (SNAPSHOT_DIR / "news.csv").exists() else pd.DataFrame()
+    catalysts = pd.DataFrame()
+    if not news.empty and "catalyst_score" in news.columns:
+        catalyst_score = pd.to_numeric(news["catalyst_score"], errors="coerce").fillna(0)
+        catalysts = news[catalyst_score > 0].copy()
+        if "published_at" in catalysts.columns:
+            catalysts = catalysts.sort_values(["catalyst_score", "published_at"], ascending=[False, False])
+        else:
+            catalysts = catalysts.sort_values("catalyst_score", ascending=False)
+        catalysts = catalysts.head(100)
+    history = pd.read_csv(SNAPSHOT_DIR / "rankings_history.csv") if (SNAPSHOT_DIR / "rankings_history.csv").exists() else pd.DataFrame()
     return earnings, news, catalysts, history
 
 
 @st.cache_data(show_spinner=False)
 def cached_performance(refresh_key: int, database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
+    if not DATABASE_PATH.exists() and (SNAPSHOT_DIR / "ranking_performance_summary.csv").exists():
+        return cached_snapshot_performance(database_mtime, "ranking")
     result = analyze_performance(DATABASE_PATH)
+    if result.bucket_metrics.empty and (SNAPSHOT_DIR / "ranking_performance_summary.csv").exists():
+        return cached_snapshot_performance(database_mtime, "ranking")
     return result.trades, result.bucket_metrics, result.factor_value, result.recommendations
 
 
 @st.cache_data(show_spinner=False)
 def cached_setup_performance(refresh_key: int, database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
+    if not DATABASE_PATH.exists() and (SNAPSHOT_DIR / "setup_performance_summary.csv").exists():
+        return cached_snapshot_performance(database_mtime, "setup")
     result = analyze_setup_performance(DATABASE_PATH)
+    if result.bucket_metrics.empty and (SNAPSHOT_DIR / "setup_performance_summary.csv").exists():
+        return cached_snapshot_performance(database_mtime, "setup")
     return result.trades, result.bucket_metrics, result.factor_value, result.recommendations
+
+
+@st.cache_data(show_spinner=False)
+def cached_snapshot_performance(database_mtime: float, prefix: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
+    if prefix == "ranking":
+        trades_path = SNAPSHOT_DIR / "ranking_forward_returns.csv"
+        summary_path = SNAPSHOT_DIR / "ranking_performance_summary.csv"
+        factors_path = SNAPSHOT_DIR / "ranking_factor_value.csv"
+        recommendations_path = SNAPSHOT_DIR / "ranking_recommendations.txt"
+    else:
+        trades_path = SNAPSHOT_DIR / "setup_forward_returns.csv"
+        summary_path = SNAPSHOT_DIR / "setup_performance_summary.csv"
+        factors_path = SNAPSHOT_DIR / "setup_factor_value.csv"
+        recommendations_path = SNAPSHOT_DIR / "setup_recommendations.txt"
+
+    trades = pd.read_csv(trades_path) if trades_path.exists() else pd.DataFrame()
+    summary = pd.read_csv(summary_path) if summary_path.exists() else pd.DataFrame()
+    factors = pd.read_csv(factors_path) if factors_path.exists() else pd.DataFrame()
+    recommendations = (
+        recommendations_path.read_text(encoding="utf-8").splitlines()
+        if recommendations_path.exists()
+        else ["No snapshot recommendations are available yet."]
+    )
+    return trades, summary, factors, recommendations
 
 
 @st.cache_data(show_spinner=False)
@@ -122,8 +196,9 @@ def cached_trade_setups(
     portfolio_size: float,
     max_risk_percent: float,
 ) -> pd.DataFrame:
-    if SETUPS_CSV.exists():
-        return apply_risk_inputs(pd.read_csv(SETUPS_CSV), portfolio_size, max_risk_percent)
+    existing = read_csv_with_snapshot(SETUPS_CSV)
+    if not existing.empty or SETUPS_CSV.exists() or snapshot_path(SETUPS_CSV).exists():
+        return apply_risk_inputs(existing, portfolio_size, max_risk_percent)
     candidates = cached_candidates(refresh_key, output_mtime)
     setup_config = SetupConfig(portfolio_size=portfolio_size, max_risk_percent=max_risk_percent)
     setups = generate_trade_setups(candidates, setup_config)
@@ -133,9 +208,10 @@ def cached_trade_setups(
 
 @st.cache_data(show_spinner=False)
 def cached_rejected_trade_setups(rejected_mtime: float, portfolio_size: float, max_risk_percent: float) -> pd.DataFrame:
-    if not REJECTED_SETUPS_CSV.exists():
+    rejected = read_csv_with_snapshot(REJECTED_SETUPS_CSV)
+    if rejected.empty and not REJECTED_SETUPS_CSV.exists() and not snapshot_path(REJECTED_SETUPS_CSV).exists():
         return pd.DataFrame()
-    return apply_risk_inputs(pd.read_csv(REJECTED_SETUPS_CSV), portfolio_size, max_risk_percent)
+    return apply_risk_inputs(rejected, portfolio_size, max_risk_percent)
 
 
 def apply_risk_inputs(setups: pd.DataFrame, portfolio_size: float, max_risk_percent: float) -> pd.DataFrame:
@@ -212,16 +288,16 @@ try:
     if refresh:
         candidates = refresh_candidates_with_progress()
     else:
-        candidates = cached_candidates(refresh_key, file_mtime(OUTPUT_PATH))
+        candidates = cached_candidates(refresh_key, snapshot_mtime(OUTPUT_PATH))
 except Exception as exc:
     st.error(str(exc))
     st.info("Install dependencies with: py -3 -m pip install -r requirements.txt")
     st.stop()
 
-earnings, news, catalysts, history = cached_db_tables(refresh_key, file_mtime(DATABASE_PATH))
-perf_trades, perf_summary, factor_value, perf_recommendations = cached_performance(refresh_key, file_mtime(DATABASE_PATH))
+earnings, news, catalysts, history = cached_db_tables(refresh_key, snapshot_mtime(DATABASE_PATH))
+perf_trades, perf_summary, factor_value, perf_recommendations = cached_performance(refresh_key, snapshot_mtime(DATABASE_PATH))
 setup_perf_trades, setup_perf_summary, setup_factor_value, setup_perf_recommendations = cached_setup_performance(
-    refresh_key, file_mtime(DATABASE_PATH)
+    refresh_key, snapshot_mtime(DATABASE_PATH)
 )
 filtered = candidates[candidates["FinalScore"] >= min_score].head(int(top_n))
 earnings_flag = (
@@ -522,4 +598,4 @@ def render_trade_setups_tab(output_mtime: float, rejected_mtime: float) -> None:
 
 
 with tabs[9]:
-    render_trade_setups_tab(file_mtime(OUTPUT_PATH), file_mtime(REJECTED_SETUPS_CSV))
+    render_trade_setups_tab(snapshot_mtime(OUTPUT_PATH), snapshot_mtime(REJECTED_SETUPS_CSV))
