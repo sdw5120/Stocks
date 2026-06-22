@@ -147,6 +147,8 @@ def cached_snapshot_db_tables(database_mtime: float) -> tuple[pd.DataFrame, pd.D
 
 @st.cache_data(show_spinner=False)
 def cached_performance(refresh_key: int, database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
+    if refresh_key == 0 and Path("ranking_performance_summary.csv").exists():
+        return cached_saved_performance(database_mtime, "ranking", Path("."))
     if not DATABASE_PATH.exists() and (SNAPSHOT_DIR / "ranking_performance_summary.csv").exists():
         return cached_snapshot_performance(database_mtime, "ranking")
     result = analyze_performance(DATABASE_PATH)
@@ -157,6 +159,8 @@ def cached_performance(refresh_key: int, database_mtime: float) -> tuple[pd.Data
 
 @st.cache_data(show_spinner=False)
 def cached_setup_performance(refresh_key: int, database_mtime: float) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
+    if refresh_key == 0 and Path("setup_performance_summary.csv").exists():
+        return cached_saved_performance(database_mtime, "setup", Path("."))
     if not DATABASE_PATH.exists() and (SNAPSHOT_DIR / "setup_performance_summary.csv").exists():
         return cached_snapshot_performance(database_mtime, "setup")
     result = analyze_setup_performance(DATABASE_PATH)
@@ -167,16 +171,21 @@ def cached_setup_performance(refresh_key: int, database_mtime: float) -> tuple[p
 
 @st.cache_data(show_spinner=False)
 def cached_snapshot_performance(database_mtime: float, prefix: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
+    return cached_saved_performance(database_mtime, prefix, SNAPSHOT_DIR)
+
+
+@st.cache_data(show_spinner=False)
+def cached_saved_performance(database_mtime: float, prefix: str, output_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, list[str]]:
     if prefix == "ranking":
-        trades_path = SNAPSHOT_DIR / "ranking_forward_returns.csv"
-        summary_path = SNAPSHOT_DIR / "ranking_performance_summary.csv"
-        factors_path = SNAPSHOT_DIR / "ranking_factor_value.csv"
-        recommendations_path = SNAPSHOT_DIR / "ranking_recommendations.txt"
+        trades_path = output_dir / "ranking_forward_returns.csv"
+        summary_path = output_dir / "ranking_performance_summary.csv"
+        factors_path = output_dir / "ranking_factor_value.csv"
+        recommendations_path = output_dir / "ranking_recommendations.txt"
     else:
-        trades_path = SNAPSHOT_DIR / "setup_forward_returns.csv"
-        summary_path = SNAPSHOT_DIR / "setup_performance_summary.csv"
-        factors_path = SNAPSHOT_DIR / "setup_factor_value.csv"
-        recommendations_path = SNAPSHOT_DIR / "setup_recommendations.txt"
+        trades_path = output_dir / "setup_forward_returns.csv"
+        summary_path = output_dir / "setup_performance_summary.csv"
+        factors_path = output_dir / "setup_factor_value.csv"
+        recommendations_path = output_dir / "setup_recommendations.txt"
 
     trades = pd.read_csv(trades_path) if trades_path.exists() else pd.DataFrame()
     summary = pd.read_csv(summary_path) if summary_path.exists() else pd.DataFrame()
@@ -212,6 +221,15 @@ def cached_rejected_trade_setups(rejected_mtime: float, portfolio_size: float, m
     if rejected.empty and not REJECTED_SETUPS_CSV.exists() and not snapshot_path(REJECTED_SETUPS_CSV).exists():
         return pd.DataFrame()
     return apply_risk_inputs(rejected, portfolio_size, max_risk_percent)
+
+
+def regenerate_trade_setup_files(candidates: pd.DataFrame, portfolio_size: float, max_risk_percent: float) -> pd.DataFrame:
+    setup_config = SetupConfig(portfolio_size=portfolio_size, max_risk_percent=max_risk_percent)
+    setups = generate_trade_setups(candidates, setup_config)
+    export_trade_setups(setups, setup_config)
+    cached_trade_setups.clear()
+    cached_rejected_trade_setups.clear()
+    return apply_risk_inputs(setups, portfolio_size, max_risk_percent)
 
 
 def apply_risk_inputs(setups: pd.DataFrame, portfolio_size: float, max_risk_percent: float) -> pd.DataFrame:
@@ -488,8 +506,22 @@ def render_trade_setups_tab(output_mtime: float, rejected_mtime: float) -> None:
         )
         st.form_submit_button("Recalculate trade setups", type="primary")
 
-    trade_setups = cached_trade_setups(0, output_mtime, portfolio_size, max_risk_percent)
-    rejected_trade_setups = cached_rejected_trade_setups(rejected_mtime, portfolio_size, max_risk_percent)
+    regenerate = st.button(
+        "Regenerate trade setups from latest research data",
+        help="Rebuild current price, entry, stop, targets, and rejected setup candidates from the latest ranked watchlist and OHLCV data.",
+    )
+    if regenerate:
+        with st.status("Regenerating trade setups", expanded=True) as status:
+            status.write("Loading latest ranked candidates.")
+            latest_candidates = cached_candidates(0, snapshot_mtime(OUTPUT_PATH))
+            status.write("Pulling OHLCV and rebuilding setup prices, entries, stops, targets, and filters.")
+            trade_setups = regenerate_trade_setup_files(latest_candidates, portfolio_size, max_risk_percent)
+            status.update(label="Trade setups regenerated", state="complete", expanded=False)
+        rejected_trade_setups = cached_rejected_trade_setups(file_mtime(REJECTED_SETUPS_CSV), portfolio_size, max_risk_percent)
+        st.success("Trade setups regenerated from the latest research data.")
+    else:
+        trade_setups = cached_trade_setups(0, output_mtime, portfolio_size, max_risk_percent)
+        rejected_trade_setups = cached_rejected_trade_setups(rejected_mtime, portfolio_size, max_risk_percent)
 
     st.subheader("Trade Setups")
     st.caption("Research-only setups. The system does not connect to a brokerage or place trades.")
