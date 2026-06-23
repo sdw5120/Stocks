@@ -7,6 +7,7 @@ __pycache__/
 research.db
 research.db-*
 research.log
+logs/
 daily_candidates.csv
 ranking_*.csv
 ranking_recommendations.txt
